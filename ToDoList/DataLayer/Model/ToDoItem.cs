@@ -11,6 +11,8 @@ namespace ToDoList.DataLayer.Model
 
         public int Status { get; set; }
 
+        public bool IsDone { get; set; }
+
         public DateTime DueDate { get; set; }
 
         public int CreatedBy { get; set; }
