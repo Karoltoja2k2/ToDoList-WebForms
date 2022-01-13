@@ -4,14 +4,18 @@
 
 .header {
     height: 100px;
-    background-color: darkgray;
+    font-family: 'Agency FB';
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
 }
 
 .header-h1 {
     margin-left: 50px;
+}
+
+.header-h1-green {
+    color: green;
 }
 
 .content-container {
@@ -21,22 +25,61 @@
 }
 
 .content {
-    width: 500px;
+    width: 700px;
+}
+
+.formTrigger-container {
+    margin-top:30px;
+    width: 100%;
+    margin-bottom:30px;
+}
+
+.formTrigger {
+    width: 150px;
+    border: none;
+    border-bottom: 2px solid green;
+    background-color: white;
+    font-size: 24px;
 }
 
 .addToDoItemForm {
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
 }
 
-.addToDoItemForm-submit {
+.addToDoItemForm-hidden {
+    display: none;
+}
+
+.addToDoItemForm-buttons {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
 }
 
-.addToDoItemForm-submit button{
-    width: 50px;
+.addToDoItemForm-submit-input{
+    width: 100px;
+    border:none;
+    border-bottom: 2px solid green;
+    background-color:white;
+    font-size:24px;
+}
+
+.addToDoItemForm-update-input {
+    width: 100px;
+    border: none;
+    border-bottom: 2px solid orange;
+    background-color: white;
+    font-size: 24px;
+}
+
+.addToDoItemForm-cancel-input {
+    width: 100px;
+    border: none;
+    border-bottom: 2px solid red;
+    background-color: white;
+    font-size: 24px;
 }
 
 .addToDoItemRow {
@@ -88,4 +131,67 @@
     border: none;
     width: 25px;
     height: 25px;
+}
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.filter-item{
+    display: flex;
+    flex-direction:column;
+}
+
+.list-column-done {
+    width: 30px;
+    max-width: 30px;
+}
+
+.list-column-title{
+    width: 150px;
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+.list-column-description {
+    width: 250px;
+    max-width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.list-column-dueDate {
+    width: 50px;
+    max-width: 50px;
+}
+
+.list-column-delete {
+    width: 75px;
+    max-width: 75px;
+}
+
+.list-cell-delete {
+    background-color: white;
+    color: red;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.list-column-edit {
+    width: 45px;
+    max-width: 45px;
+}
+
+.list-cell-edit {
+    background-color: white;
+    color: orange;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
 }

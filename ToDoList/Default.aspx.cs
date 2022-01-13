@@ -13,39 +13,69 @@ namespace ToDoList
 
         protected List<ToDoItem> toDoItems = new List<ToDoItem>();
 
+        protected static ToDoItem form = new ToDoItem();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             _repository = new ToDoItemRepository();
             if (!Page.IsPostBack)
             {
                 toDoItems = _repository.Get();
-                CalendarValueTextBox.Text = DateTime.Now.ToString("d.M.yyyy");
+                CalendarValueTextBox.Text = DateTime.Now.ToString("dd.MM.yyyy");
                 CalendarValueTextBox.Attributes.Add("onClick", "txtBox1_ClientClicked()");
             }
 
             CalendarContainer.Style["display"] = CalendarState.Text;
         }
 
-        protected void SubmitHandler(object sender, EventArgs e)
+        protected void AddItemHandler(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
 
-            _repository.Add(new ToDoItem()
-            {
-                Title = TitleTextBox.Text,
-                Description = DescriptionTextBox.Text,  
-                Status = StatusDropDownList.SelectedIndex,
-                CreatedBy = 1,
-                DueDate = DateTime.Parse(CalendarValueTextBox.Text),
-            });
+            form.Id = 0;
+            form.Title = TitleTextBox.Text;
+            form.Description = DescriptionTextBox.Text;
+            form.CreatedBy = 1;
+            form.DueDate = DateTime.Parse(CalendarValueTextBox.Text);
+            _repository.Add(form);
+            ClearForm();
 
             GridView1.DataBind();
             ChangeCalendarVisibility(false);
         }
 
+        private void ClearForm()
+        {
+            form.Id = 0;
+            form.Title = String.Empty;
+            form.Description = String.Empty;
+            form.DueDate = DateTime.Now;
+
+            TitleTextBox.Text = form.Title;
+            DescriptionTextBox.Text = form.Description;
+            CalendarValueTextBox.Text = form.DueDate.ToString("dd.MM.yyyy");
+        }
+
+        protected void UpdateItemHandler(object sender, EventArgs e)
+        {
+            if (!Page.IsValid) return;
+
+            form.Title = TitleTextBox.Text;
+            form.Description = DescriptionTextBox.Text;
+            form.DueDate = DateTime.Parse(CalendarValueTextBox.Text);
+            _repository.Update(form);
+
+            GridView1.DataBind();
+            ChangeCalendarVisibility(false);
+        }
+        protected void CancelUpdateHandler(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
         protected void CalendarSelectionChangeHandler(object sender, EventArgs e)
         {
-            CalendarValueTextBox.Text = DueDateCalendar.SelectedDate.ToString("d.M.yyyy");
+            CalendarValueTextBox.Text = DueDateCalendar.SelectedDate.ToString("dd.MM.yyyy");
             ChangeCalendarVisibility(false);
         }
 
@@ -68,12 +98,35 @@ namespace ToDoList
             CalendarContainer.Style["display"] = CalendarState.Text;
         }
 
-        protected void GridView1_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "Delete")
             {
-                var arg = e.CommandArgument;
+                var id = GetIdFromRowEvent(e);
+                _repository.Delete(id);
+                GridView1.DataBind();
+                e.Handled = true;
+                return;
             }
+
+            if (e.CommandName == "Edit")
+            {
+                var id = GetIdFromRowEvent(e);
+                form = _repository.GetById(id);
+                TitleTextBox.Text = form.Title;
+                DescriptionTextBox.Text = form.Description;
+                CalendarValueTextBox.Text = form.DueDate.ToString("dd.MM.yyyy");
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private int GetIdFromRowEvent(GridViewCommandEventArgs e)
+        {
+            var row = ((GridView)e.CommandSource).Rows[int.Parse((string)e.CommandArgument)];
+            var txtSomething = row.FindControl("IsDoneCheckBoxWithItemId");
+            var cb = (CheckBox)txtSomething;
+            return int.Parse(cb.Attributes["ItemId"]);
         }
 
         protected void IsDoneCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -87,19 +140,6 @@ namespace ToDoList
             }
 
             _repository.UpdateIsDone(idValue, checkBox.Checked);
-        }
-
-        protected void DeleteItem(object sender, EventArgs e)
-        {
-            var checkBox = (CheckBox)sender;
-            var id = checkBox?.Attributes["ItemId"];
-
-            if (!int.TryParse(id, out var idValue))
-            {
-                return;
-            }
-
-            _repository.Delete(idValue);
         }
     }
 }
