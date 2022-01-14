@@ -24,6 +24,15 @@ namespace ToDoList
         protected global::System.Web.UI.WebControls.TextBox FormState;
 
         /// <summary>
+        /// FormTrigger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ToDoList.UserControl.ContentWraper FormTrigger;
+
+        /// <summary>
         /// TitleLabel control.
         /// </summary>
         /// <remarks>
@@ -69,58 +78,13 @@ namespace ToDoList
         protected global::System.Web.UI.WebControls.TextBox DescriptionTextBox;
 
         /// <summary>
-        /// CalendarState control.
+        /// DueDatePicker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CalendarState;
-
-        /// <summary>
-        /// DueDateLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DueDateLabel;
-
-        /// <summary>
-        /// CalendarValueTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CalendarValueTextBox;
-
-        /// <summary>
-        /// CustomValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
-
-        /// <summary>
-        /// CalendarContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CalendarContainer;
-
-        /// <summary>
-        /// DueDateCalendar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar DueDateCalendar;
+        protected global::ToDoList.UserControl.DatePicker DueDatePicker;
 
         /// <summary>
         /// CancelButton control.
@@ -150,6 +114,15 @@ namespace ToDoList
         protected global::System.Web.UI.WebControls.Button SubmitButton;
 
         /// <summary>
+        /// FilterState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FilterState;
+
+        /// <summary>
         /// IsDoneFilter control.
         /// </summary>
         /// <remarks>
@@ -175,6 +148,24 @@ namespace ToDoList
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DescriptionFilter;
+
+        /// <summary>
+        /// DueDateFromFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ToDoList.UserControl.DatePicker DueDateFromFilter;
+
+        /// <summary>
+        /// DueDateToFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ToDoList.UserControl.DatePicker DueDateToFilter;
 
         /// <summary>
         /// ObjectDataSource1 control.

@@ -1,12 +1,40 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/App.Master" MaintainScrollPositionOnPostback="true" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="ToDoList.Default" %>
+
+<%@ Register Src="~/UserControl/DatePicker.ascx" TagPrefix="uc1" TagName="DatePicker" %>
+<%@ Register Src="~/UserControl/ContentWraper.ascx" TagPrefix="uc1" TagName="ContentWraper" %>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="formTrigger-container">
-        <asp:TextBox ID="FormState" runat="server" style="display:none;"/>
-        <button class="formTrigger" Type="button" onclick="trigger_form()" >+ Add item</button>
+    <div class="formTrigger-container" onclick="trigger_form()">
+        <asp:TextBox ID="FormState" runat="server" style="display:none;" Text="0"/>
+        <label id="formTriggerLabel" class="formTrigger-label"></label>
+        <button id="formTrigger" class="formTrigger" Type="button"  >
+            <% if(CurrentToDoItemId != 0) { %>
+                Update item
+            <% }
+            else { %>
+                Add item
+            <% } %>
+        </button>
     </div>
 
-    <div class="addToDoItemForm-hidden" id="addToDoItemForm">
+    <uc1:ContentWraper
+        ID="FormTrigger"
+        TargetId="addToDoItemForm"
+        ButtonValue='<%: CurrentToDoItemId != 0 ? "Update item" : "Add item" %>'
+
+        runat="server"/>
+    
+    <%--        ButtonValue='
+            <% if(CurrentToDoItemId != 0) { %>
+                Update item
+            <% }
+            else { %>
+                Add item
+            <% } %>'--%>
+
+    <div class="addToDoItemForm" id="addToDoItemForm">
         <div class="addToDoItemRow">
             <asp:Label ID="TitleLabel" Text="Title" runat="server"/>
             <asp:TextBox ID="TitleTextBox" AutoPostBack="true" MaxLength="64" runat="server" class="addToDoItemRow-input"></asp:TextBox>
@@ -19,31 +47,12 @@
         </div>
 
         <div class="addToDoItemRow">
-            <asp:TextBox ID="CalendarState" runat="server" style="display:none;"/>
-            <asp:Label ID="DueDateLabel" Text="Due date" runat="server"/>
-            <asp:TextBox ID="CalendarValueTextBox" Enabled="true" runat="server" class="addToDoItemRow-input"></asp:TextBox>
-            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Please insert date in format day.month.year" ControlToValidate="CalendarValueTextBox" ForeColor="Red" OnServerValidate="CustomValidator1_ServerValidate"></asp:CustomValidator>
-            <div>
-                <div id="CalendarContainer" class="calendar-container" runat="server">
-                    <div class="calendar-exit-container">
-                        <button type="button" class="calendar-exit" onClick="close_calendar()">x</button>
-                    </div>
-                    <asp:Calendar ID="DueDateCalendar" class="calendar" runat="server" BackColor="White" BorderColor="Black" DayNameFormat="Shortest" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" TitleFormat="Month" Width="400px" OnSelectionChanged="CalendarSelectionChangeHandler">
-                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" ForeColor="#333333" Height="10pt" />
-                        <DayStyle Width="14%" />
-                        <NextPrevStyle Font-Size="8pt" ForeColor="White" />
-                        <OtherMonthDayStyle ForeColor="#999999" />
-                        <SelectedDayStyle BackColor="#CC3333" ForeColor="White" />
-                        <SelectorStyle BackColor="#CCCCCC" Font-Bold="True" Font-Names="Verdana" Font-Size="8pt" ForeColor="#333333" Width="1%" />
-                        <TitleStyle BackColor="Black" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
-                        <TodayDayStyle BackColor="#CCCC99" />
-                    </asp:Calendar>
-                </div>
-            </div>
+            <asp:Label runat="server" Text="Due date"/>
+            <uc1:DatePicker runat="server" ID="DueDatePicker" />
         </div>
 
         <div class="addToDoItemForm-buttons">
-            <% if(form.Id != 0) { %>
+            <% if(CurrentToDoItemId != 0) { %>
                 <asp:Button ID="CancelButton" CssClass="addToDoItemForm-cancel-input" runat="server" OnClick="CancelUpdateHandler" Text="Cancel"/>
                 <asp:Button ID="UpdateButton" CssClass="addToDoItemForm-update-input" runat="server" OnClick="UpdateItemHandler" Text="Update"/>
             <% }
@@ -53,7 +62,15 @@
         </div>
     </div>
 
-    <div class="filter">
+    <div class="formTrigger-container" onclick="trigger_filter()">
+        <asp:TextBox ID="FilterState" runat="server" style="display:none;" Text="0"/>
+        <label id="filterTriggerLabel" class="formTrigger-label"></label>
+        <button id="filterTrigger" class="formTrigger" Type="button"  >
+            Filters
+        </button>
+    </div>  
+
+    <div class="filter" id="toDoItemFilters">
         <div class="filter-item">
             <asp:Label runat="server" Text="Is done"></asp:Label>
             <asp:DropDownList ID="IsDoneFilter" runat="server" AutoPostBack="true">
@@ -62,6 +79,7 @@
                 <asp:ListItem Value="2">false</asp:ListItem>
             </asp:DropDownList>
         </div>
+        
         <div class="filter-item">
             <asp:Label runat="server" Text="Title"></asp:Label>
             <asp:TextBox ID="TitleFilter" runat="server" AutoPostBack="true"></asp:TextBox>
@@ -70,13 +88,24 @@
             <asp:Label runat="server" Text="Description"></asp:Label>
             <asp:TextBox ID="DescriptionFilter" runat="server" AutoPostBack="true"></asp:TextBox>
         </div>
+            <div class="filter-item">
+            <asp:Label runat="server" Text="Due date from"></asp:Label>
+            <uc1:DatePicker runat="server" id="DueDateFromFilter" />
+        </div>
+
+    <div class="filter-item">
+            <asp:Label runat="server" Text="Due date to"></asp:Label>
+            <uc1:DatePicker runat="server" id="DueDateToFilter" />
+        </div>
     </div>
 
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="Get" TypeName="ToDoList.DataLayer.Repository.ToDoItemRepository">
         <SelectParameters>
             <asp:ControlParameter ControlID="IsDoneFilter" DefaultValue="0" Name="isDone" PropertyName="SelectedValue" Type="Int32" />
             <asp:ControlParameter ControlID="TitleFilter" DefaultValue="" Name="title" PropertyName="Text" Type="String" />
-            <asp:ControlParameter ControlID="DescriptionFilter" Name="description" PropertyName="Text" Type="String" />
+            <asp:ControlParameter ControlID="DescriptionFilter" Name="description" PropertyName="Text" Type="String" DefaultValue="" />
+            <asp:ControlParameter ControlID="DueDateFromFilter" Name="dueDateFrom" PropertyName="selected" Type="DateTime" />
+            <asp:Parameter Name="dueDateTo" Type="DateTime" />
         </SelectParameters>
     </asp:ObjectDataSource>
 
@@ -84,7 +113,7 @@
         <Columns>
             <asp:TemplateField HeaderText="Done" ItemStyle-CssClass="list-column-done">
                 <ItemTemplate>
-                    <asp:CheckBox ID="IsDoneCheckBoxWithItemId" ItemId='<%# Eval("Id") %>' Checked='<%# (bool)Eval("IsDone") %>' OnCheckedChanged="IsDoneCheckBox_CheckedChanged" runat="server" AutoPostBack="true"/>
+                    <asp:CheckBox ID="IsDoneCheckBoxWithItemId" ItemId='<%# Eval("Id") %>' Checked='<%# (bool)Eval("IsDone") %>' OnCheckedChanged="IsDoneCheckBoxChangedHandler" runat="server" AutoPostBack="true"/>
                 </ItemTemplate>
             </asp:TemplateField>
 
@@ -123,34 +152,30 @@
         <SortedDescendingHeaderStyle BackColor="#242121" />
     </asp:GridView>
 
-    <script language="javascript">  
-        function txtBox1_ClientClicked() {
-            var calendar = document.getElementById('<%=CalendarContainer.ClientID%>');
-            calendar.style.display = 'flex';
-
-            var calendarState = document.getElementById('<%=CalendarState.ClientID%>');
-            calendarState.value = 'flex';
-        }
-        function close_calendar() {
-            var calendar = document.getElementById('<%=CalendarContainer.ClientID%>');
-            calendar.style.display = 'none';
-
-            var calendarState = document.getElementById('<%=CalendarState.ClientID%>');
-            calendarState.value = 'none';
-        }
+    <script language="javascript">
 
         window.onload = pageLoad
         function pageLoad() {
             var formState = document.getElementById('<%=FormState.ClientID%>');
             var form = document.getElementById('addToDoItemForm');
-            setFormState(form, formState.value)
+            var trigger = document.getElementById('formTriggerLabel');
+            setFormState(form, formState.value, trigger)
+
+            console.log(formState.value)
+
+            var filterState = document.getElementById('<%=FilterState.ClientID%>');
+            var filter = document.getElementById('toDoItemFilters');
+            var filterTrigger = document.getElementById('filterTriggerLabel');
+            setFormState(filter, filterState.value, filterTrigger)
         }
 
-        function setFormState(form, value) {
+        function setFormState(form, value, trigger) {
             if (value == 1) {
-                form.className = "addToDoItemForm"
+                form.className = form.className.replace("-hidden", "")
+                trigger.innerText = `/\\`
             } else {
-                form.className = "addToDoItemForm-hidden"
+                form.className += "-hidden"
+                trigger.innerText = '\\/'
             }
         }
 
@@ -160,7 +185,19 @@
 
             formState.value = newFormState;
             var form = document.getElementById('addToDoItemForm');
-            setFormState(form, newFormState)
+            var trigger = document.getElementById('formTriggerLabel');
+            setFormState(form, newFormState, trigger)
+        }
+
+        function trigger_filter() {
+            var filterState = document.getElementById('<%=FilterState.ClientID%>');
+            var newFormState = filterState.value == 0 ? 1 : 0;
+
+            filterState.value = newFormState;
+            var filter = document.getElementById('toDoItemFilters');
+            var trigger = document.getElementById('filterTriggerLabel');
+
+            setFormState(filter, filterState.value, trigger)
         }
     </script>
 </asp:Content>

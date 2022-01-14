@@ -12,9 +12,11 @@ namespace ToDoList.DataLayer.Repository
 
         void UpdateIsDone(int id, bool isDone);
 
-        List<ToDoItem> Get();
-
-        List<ToDoItem> Get(int isDone, string title, string description);
+        List<ToDoItem> Get(int isDone,
+            string title,
+            string description,
+            DateTime? dueDateFrom,
+            DateTime? dueDateTo);
 
         ToDoItem GetById(int id);
 
@@ -44,11 +46,6 @@ namespace ToDoList.DataLayer.Repository
             }
         }
 
-        public List<ToDoItem> Get()
-        {
-            return _context.ToDoItem.OrderBy(x => x.DueDate).ToList();
-        }
-
         public void UpdateIsDone(int id, bool isDone)
         {
             var result = _context.ToDoItem.SingleOrDefault(x => x.Id == id);
@@ -74,7 +71,11 @@ namespace ToDoList.DataLayer.Repository
             return _context.ToDoItem.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<ToDoItem> Get(int isDone, string title, string description)
+        public List<ToDoItem> Get(int isDone,
+            string title,
+            string description,
+            DateTime? dueDateFrom,
+            DateTime? dueDateTo)
         {
             bool? filter = null;
             switch (isDone)
@@ -89,9 +90,13 @@ namespace ToDoList.DataLayer.Repository
 
             if (!string.IsNullOrWhiteSpace(title))
                 query = query.Where(x => x.Title.Contains(title));
-
             if (!string.IsNullOrWhiteSpace(description))
                 query = query.Where(x => x.Description.Contains(description));
+
+            if (dueDateFrom != null)
+                query = query.Where(x => x.DueDate >= dueDateFrom.Value);
+            if (dueDateTo != null)
+                query = query.Where(x => x.DueDate <= dueDateTo.Value);
 
             return query.OrderBy(x => x.DueDate).ToList();
         }

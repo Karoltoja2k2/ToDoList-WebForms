@@ -78,8 +78,9 @@
       <DependentUpon>ToDoList.mdf</DependentUpon>
     </Content>
     <Content Include="Default.aspx" />
-    <Content Include="Script\calendar.js" />
     <Content Include="Style\default.css" />
+    <Content Include="UserControl\ContentWraper.ascx" />
+    <Content Include="UserControl\DatePicker.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -101,6 +102,20 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ContentWraper.ascx.cs">
+      <DependentUpon>ContentWraper.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ContentWraper.ascx.designer.cs">
+      <DependentUpon>ContentWraper.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DatePicker.ascx.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DatePicker.ascx.designer.cs">
+      <DependentUpon>DatePicker.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

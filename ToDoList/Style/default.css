@@ -2,6 +2,15 @@
     margin: 0px;
 }
 
+.test {
+    background-color: red;
+    width: 1000px;
+    height: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .header {
     height: 100px;
     font-family: 'Agency FB';
@@ -29,17 +38,29 @@
 }
 
 .formTrigger-container {
-    margin-top:30px;
     width: 100%;
-    margin-bottom:30px;
+    margin: 30px 0 30px 0;
+    cursor:pointer;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
 }
 
 .formTrigger {
     width: 150px;
     border: none;
-    border-bottom: 2px solid green;
     background-color: white;
     font-size: 24px;
+    cursor: pointer;
+    text-align:left;
+}
+
+.formTrigger-label {
+    color:green;
+    font-size: 20px;
+    font-weight:900;
+    font-family:'Agency FB';
+    cursor: pointer;
 }
 
 .addToDoItemForm {
@@ -131,6 +152,7 @@
     border: none;
     width: 25px;
     height: 25px;
+    cursor:pointer;
 }
 
 .filter {
@@ -138,6 +160,10 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 30px;
+}
+
+.filter-hidden {
+    display: none;
 }
 
 .filter-item{

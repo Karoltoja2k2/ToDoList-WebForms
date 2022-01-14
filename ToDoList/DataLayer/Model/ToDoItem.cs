@@ -3,6 +3,7 @@ using ToDoList.DataLayer.Model.Base;
 
 namespace ToDoList.DataLayer.Model
 {
+    [Serializable]
     public class ToDoItem : BaseEntity
     {
         public string Title { get; set; }
