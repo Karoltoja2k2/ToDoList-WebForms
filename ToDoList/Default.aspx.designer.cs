@@ -15,22 +15,13 @@ namespace ToDoList
     {
 
         /// <summary>
-        /// FormState control.
+        /// ContentWraper1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FormState;
-
-        /// <summary>
-        /// FormTrigger control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ToDoList.UserControl.ContentWraper FormTrigger;
+        protected global::ToDoList.UserControl.ContentWraper ContentWraper1;
 
         /// <summary>
         /// TitleLabel control.
@@ -114,13 +105,13 @@ namespace ToDoList
         protected global::System.Web.UI.WebControls.Button SubmitButton;
 
         /// <summary>
-        /// FilterState control.
+        /// ContentWraper2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FilterState;
+        protected global::ToDoList.UserControl.ContentWraper ContentWraper2;
 
         /// <summary>
         /// IsDoneFilter control.
@@ -175,6 +166,15 @@ namespace ToDoList
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
+
+        /// <summary>
+        /// ContentWraper3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ToDoList.UserControl.ContentWraper ContentWraper3;
 
         /// <summary>
         /// GridView1 control.

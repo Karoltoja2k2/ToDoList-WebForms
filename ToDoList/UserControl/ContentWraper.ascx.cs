@@ -11,11 +11,27 @@ namespace ToDoList.UserControl
     {
         public string ButtonValue;
 
-        public string TargetId { get; set; }
+        public bool IsHidden
+        {
+            get => (bool)ViewState[$"{nameof(IsHidden)}_{ID}"];
+            set => ViewState[$"{nameof(IsHidden)}_{ID}"] = value;
+        }
+
+        public bool DefaultIsHidden { get; set; } = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                IsHidden = DefaultIsHidden;
+            }
 
+            ButtonLabel.Text = ButtonValue;
+        }
+
+        protected void TriggerElem(object sender, EventArgs e)
+        {
+            IsHidden = !IsHidden;
         }
     }
 }

@@ -31,6 +31,8 @@ namespace ToDoList
             {
                 CurrentToDoItemId = 0;
             }
+
+            ContentWraper1.ButtonValue = CurrentToDoItemId != 0 ? "Update item" : "Add item";
         }
 
         protected void AddItemHandler(object sender, EventArgs e)

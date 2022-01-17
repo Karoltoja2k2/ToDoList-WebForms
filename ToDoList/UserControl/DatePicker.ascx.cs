@@ -14,12 +14,15 @@ namespace ToDoList.UserControl
             }
         }
 
-        protected string UniqueId = string.Empty;
+        public bool IsHidden
+        {
+            get => (bool)ViewState[$"{nameof(IsHidden)}_{ID}"];
+            set => ViewState[$"{nameof(IsHidden)}_{ID}"] = value;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            UniqueId = Guid.NewGuid().ToString("N");
-            CalendarValueTextBox.Attributes["onClick"] = $"CalendarValueTextBox_ClientClicked_{UniqueId}()";
+            CalendarValueTextBox.Attributes["onClick"] = $"OpenCalendar_{ID}()";
             if (!Page.IsPostBack)
             {
                 selected = DateTime.Now;
@@ -44,6 +47,11 @@ namespace ToDoList.UserControl
         {
             CalendarState.Text = visible ? "flex" : "none";
             CalendarContainer.Style["display"] = CalendarState.Text;
+        }
+
+        protected void OpenCalendar(object sender, EventArgs e)
+        {
+
         }
     }
 }

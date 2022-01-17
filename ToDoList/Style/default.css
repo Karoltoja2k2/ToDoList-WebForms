@@ -37,32 +37,6 @@
     width: 700px;
 }
 
-.formTrigger-container {
-    width: 100%;
-    margin: 30px 0 30px 0;
-    cursor:pointer;
-    display:flex;
-    flex-direction: row;
-    align-items:center;
-}
-
-.formTrigger {
-    width: 150px;
-    border: none;
-    background-color: white;
-    font-size: 24px;
-    cursor: pointer;
-    text-align:left;
-}
-
-.formTrigger-label {
-    color:green;
-    font-size: 20px;
-    font-weight:900;
-    font-family:'Agency FB';
-    cursor: pointer;
-}
-
 .addToDoItemForm {
     display: flex;
     flex-direction: column;
@@ -130,31 +104,6 @@
     line-height: 14px;
 }
 
-.calendar-container {
-    display: none;
-    position: absolute;
-    flex-direction: column;
-    align-items: center;
-}
-
-.calendar-exit-container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-color: black;
-}
-
-.calendar-exit {
-    background-color: black;
-    color: white;
-    font-size: 20px;
-    border: none;
-    width: 25px;
-    height: 25px;
-    cursor:pointer;
-}
-
 .filter {
     display: flex;
     flex-direction: row;
@@ -169,6 +118,15 @@
 .filter-item{
     display: flex;
     flex-direction:column;
+}
+
+.list{
+    display:table;
+    width: 100%;
+}
+
+.list-hidden{
+    display:none;
 }
 
 .list-column-done {

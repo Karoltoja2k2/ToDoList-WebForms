@@ -79,6 +79,8 @@
     </Content>
     <Content Include="Default.aspx" />
     <Content Include="Style\default.css" />
+    <Content Include="Style\UserControl\ContentWraper.css" />
+    <Content Include="Style\UserControl\DatePicker.css" />
     <Content Include="UserControl\ContentWraper.ascx" />
     <Content Include="UserControl\DatePicker.ascx" />
     <Content Include="Web.config" />
