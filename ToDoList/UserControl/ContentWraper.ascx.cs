@@ -9,7 +9,7 @@ namespace ToDoList.UserControl
 {
     public partial class ContentWraper : System.Web.UI.UserControl
     {
-        public string ButtonValue;
+        public string ButtonValue { get; set; }
 
         public bool IsHidden
         {

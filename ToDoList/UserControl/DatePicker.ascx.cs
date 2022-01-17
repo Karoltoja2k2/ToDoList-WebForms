@@ -9,7 +9,7 @@ namespace ToDoList.UserControl
         {
             get => CalendarControl.SelectedDate;
             set {
-                CalendarControl.SelectedDate = value;
+                CalendarControl.SelectedDate = value.Date;
                 CalendarValueTextBox.Text = CalendarControl.SelectedDate.ToString("dd.MM.yyyy");
             }
         }
@@ -20,12 +20,15 @@ namespace ToDoList.UserControl
             set => ViewState[$"{nameof(IsHidden)}_{ID}"] = value;
         }
 
+
+        public DateTime DefaultValue { get; set; } = DateTime.Now;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            CalendarValueTextBox.Attributes["onClick"] = $"OpenCalendar_{ID}()";
             if (!Page.IsPostBack)
             {
-                selected = DateTime.Now;
+                IsHidden = true;
+                selected = DefaultValue;
             }
         }
 
@@ -45,13 +48,17 @@ namespace ToDoList.UserControl
 
         private void ChangeCalendarVisibility(bool visible)
         {
-            CalendarState.Text = visible ? "flex" : "none";
-            CalendarContainer.Style["display"] = CalendarState.Text;
+            IsHidden = !visible;
         }
 
         protected void OpenCalendar(object sender, EventArgs e)
         {
+            ChangeCalendarVisibility(true);
+        }
 
+        protected void CloseCalendar(object sender, EventArgs e)
+        {
+            ChangeCalendarVisibility(false);
         }
     }
 }

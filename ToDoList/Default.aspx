@@ -3,11 +3,15 @@
 <%@ Register Src="~/UserControl/DatePicker.ascx" TagPrefix="uc1" TagName="DatePicker" %>
 <%@ Register Src="~/UserControl/ContentWraper.ascx" TagPrefix="uc1" TagName="ContentWraper" %>
 
-
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>
+
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
     <uc1:ContentWraper
         ID="ContentWraper1"
         runat="server"
+        ButtonValue="Form"
         DefaultIsHidden="true" />
 
     <div id="addToDoItemForm" class='<%= ContentWraper1.IsHidden ? "addToDoItemForm-hidden" : "addToDoItemForm" %>'>
@@ -24,8 +28,10 @@
 
         <div class="addToDoItemRow">
             <asp:Label runat="server" Text="Due date" />
+
             <uc1:DatePicker runat="server" ID="DueDatePicker" />
-        </div>
+
+            </div>
 
         <div class="addToDoItemForm-buttons">
             <% if (CurrentToDoItemId != 0)
@@ -40,11 +46,20 @@
         </div>
     </div>
 
+                                        </ContentTemplate>
+                                </asp:UpdatePanel>
+
+
+
+                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
     <uc1:ContentWraper
         ID="ContentWraper2"
         ButtonValue="Filters"
         runat="server" 
         DefaultIsHidden="true"/>
+
+
 
     <div id="toDoItemFilters" class='<%= ContentWraper2.IsHidden ? "filter-hidden" : "filter" %>'>
         <div class="filter-item">
@@ -71,7 +86,7 @@
 
         <div class="filter-item">
             <asp:Label runat="server" Text="Due date to"></asp:Label>
-            <uc1:DatePicker runat="server" ID="DueDateToFilter" />
+            <uc1:DatePicker runat="server" ID="DueDateToFilter"/>
         </div>
     </div>
 
@@ -81,7 +96,7 @@
             <asp:ControlParameter ControlID="TitleFilter" DefaultValue="" Name="title" PropertyName="Text" Type="String" />
             <asp:ControlParameter ControlID="DescriptionFilter" Name="description" PropertyName="Text" Type="String" DefaultValue="" />
             <asp:ControlParameter ControlID="DueDateFromFilter" Name="dueDateFrom" PropertyName="selected" Type="DateTime" />
-            <asp:Parameter Name="dueDateTo" Type="DateTime" />
+            <asp:ControlParameter ControlID="DueDateToFilter" Name="dueDateTo" PropertyName="selected" Type="DateTime" />
         </SelectParameters>
     </asp:ObjectDataSource>
 
@@ -135,4 +150,7 @@
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
     </div>
+
+                                    </ContentTemplate>
+            </asp:UpdatePanel>
 </asp:Content>

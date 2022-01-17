@@ -2,12 +2,16 @@
 <link href="../Style/UserControl/DatePicker.css" rel="stylesheet" />
 
 <asp:TextBox ID="CalendarState" runat="server" style="display:none;"/>
-<asp:TextBox ID="CalendarValueTextBox" Enabled="true" runat="server" class="addToDoItemRow-input"></asp:TextBox>
-<asp:LinkButton runat="server" OnClick="OpenCalendar"/>
+<div class="calendar-values">
+    <asp:TextBox ID="CalendarValueTextBox" CssClass="addToDoItemRow-input" Enabled="false" runat="server"></asp:TextBox>
+    <asp:LinkButton ID="OpenCalendarButton" runat="server" OnClick="OpenCalendar" CssClass="calendar-values-trigger" CausesValidation="false">
+        <i class="far fa-calendar-alt"></i>
+    </asp:LinkButton>
+</div>
 <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Please insert date in format day.month.year" ControlToValidate="CalendarValueTextBox" ForeColor="Red" OnServerValidate="DateTimeFormatValidator"></asp:CustomValidator>
-<asp:Panel ID="CalendarContainer" CssClass="calendar-container" runat="server">
+<div class='<%= IsHidden ? "calendar-container-hidden" : "calendar-container" %>'>
     <div class="calendar-exit-container">
-        <button type="button" class="calendar-exit" onClick='<%=$"CloseCalendar_{ID}()" %>'>x</button>
+        <asp:LinkButton runat="server" OnClick="CloseCalendar" CausesValidation="false" CssClass="calendar-exit">x</asp:LinkButton>
     </div>
     <asp:Calendar ID="CalendarControl" class="calendar" runat="server" BackColor="White" BorderColor="Black" DayNameFormat="Shortest" Font-Names="Times New Roman" Font-Size="10pt" ForeColor="Black" Height="220px" NextPrevFormat="FullMonth" TitleFormat="Month" Width="400px" OnSelectionChanged="CalendarSelectionChangeHandler">
         <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" ForeColor="#333333" Height="10pt" />
@@ -19,34 +23,4 @@
         <TitleStyle BackColor="Black" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
         <TodayDayStyle BackColor="#CCCC99" />
     </asp:Calendar>
-</asp:Panel>
-
-<script language="javascript">
-    function OpenCalendar_<%=ID %>() {
-        var calendar = document.getElementById('<%=CalendarContainer.ClientID%>');
-        calendar.style.display = 'flex';
-    
-        var calendarState = document.getElementById('<%=CalendarState.ClientID%>');
-        calendarState.value = 'flex';
-        console.log(calendarState.value)
-    }
-
-    function CloseCalendar_<%=ID %>() {
-        var calendar = document.getElementById('<%=CalendarContainer.ClientID%>');
-        calendar.style.display = 'none';
-        
-        var calendarState = document.getElementById('<%=CalendarState.ClientID%>');
-        calendarState.value = 'none';
-        console.log(calendarState.value)
-    }
-
-    window.onload += pageLoad_<%=ID %>
-    function pageLoad_<%=ID %>() {
-        var calendarState = document.getElementById('<%=CalendarState.ClientID%>');
-        var calendar = document.getElementById('<%=CalendarContainer.ClientID%>');
-        console.log('<%=CalendarState.ClientID%>')
-        console.log('<%=CalendarContainer.ClientID%>')
-
-        calendar.style.display = calendarState.value;
-   }
-</script>
+</div>

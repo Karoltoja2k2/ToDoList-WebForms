@@ -9,6 +9,7 @@
     </asp:ContentPlaceHolder>
     <link href="Style/default.css" rel="stylesheet" />
     <script src="Script/calendar.js"></script>
+    <script src="https://kit.fontawesome.com/a7e04b6430.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <form id="form1" runat="server">

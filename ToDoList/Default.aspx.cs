@@ -31,8 +31,6 @@ namespace ToDoList
             {
                 CurrentToDoItemId = 0;
             }
-
-            ContentWraper1.ButtonValue = CurrentToDoItemId != 0 ? "Update item" : "Add item";
         }
 
         protected void AddItemHandler(object sender, EventArgs e)
@@ -67,6 +65,7 @@ namespace ToDoList
 
             _repository.Update(form);
             GridView1.DataBind();
+            ClearForm();
         }
 
         protected void CancelUpdateHandler(object sender, EventArgs e) =>
@@ -94,6 +93,10 @@ namespace ToDoList
                 _repository.Delete(id);
                 GridView1.DataBind();
                 e.Handled = true;
+
+                if (CurrentToDoItemId == id)
+                    ClearForm();
+                
                 return;
             }
 
@@ -103,6 +106,7 @@ namespace ToDoList
                 var id = GetIdFromRowEvent(e);
                 SetFormData(_repository.GetById(id));
                 e.Handled = true;
+                UpdatePanel1.DataBind();
                 return;
             }
         }
