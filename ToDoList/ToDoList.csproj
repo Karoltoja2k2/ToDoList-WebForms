@@ -78,7 +78,8 @@
       <DependentUpon>ToDoList.mdf</DependentUpon>
     </Content>
     <Content Include="Default.aspx" />
-    <Content Include="Style\default.css" />
+    <Content Include="Style\Base\Input.css" />
+    <Content Include="Style\Page\Default.css" />
     <Content Include="Style\UserControl\ContentWraper.css" />
     <Content Include="Style\UserControl\DatePicker.css" />
     <Content Include="UserControl\ContentWraper.ascx" />

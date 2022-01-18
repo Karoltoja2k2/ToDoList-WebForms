@@ -7,8 +7,7 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <link href="Style/default.css" rel="stylesheet" />
-    <script src="Script/calendar.js"></script>
+    <link href="Style/Page/Default.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/a7e04b6430.js" crossorigin="anonymous"></script>
 </head>
 <body>

@@ -2,15 +2,6 @@
     margin: 0px;
 }
 
-.test {
-    background-color: red;
-    width: 1000px;
-    height: 1000px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .header {
     height: 100px;
     font-family: 'Agency FB';
@@ -140,7 +131,6 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
-
 
 .list-column-description {
     width: 250px;

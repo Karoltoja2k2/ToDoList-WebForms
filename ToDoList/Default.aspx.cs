@@ -106,6 +106,7 @@ namespace ToDoList
                 var id = GetIdFromRowEvent(e);
                 SetFormData(_repository.GetById(id));
                 e.Handled = true;
+                ContentWraper1.IsHidden = false;
                 UpdatePanel1.DataBind();
                 return;
             }
