@@ -1,5 +1,11 @@
-﻿input {
+﻿.default-input {
     border: none;
+    border-bottom: 2px solid #CCCCCC;
+    height: 23px
+}
+
+.default-input:focus{
+    outline: none;
     border-bottom: 2px solid green;
-    background-color: white;
+    transition: all ease-in 0.4s;
 }

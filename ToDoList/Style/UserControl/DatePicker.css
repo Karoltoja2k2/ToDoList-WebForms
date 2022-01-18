@@ -20,11 +20,13 @@
 .calendar-exit {
     background-color: black;
     color: white;
-    font-size: 20px;
+    font-size: 25px;
     border: none;
     width: 25px;
     height: 25px;
     cursor: pointer;
+    text-decoration:none;
+    text-align: center;
 }
 
 .calendar-values{

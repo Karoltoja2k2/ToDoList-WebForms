@@ -9,12 +9,13 @@
     </asp:ContentPlaceHolder>
     <link href="Style/Page/Default.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/a7e04b6430.js" crossorigin="anonymous"></script>
+    <link href="Style/Base/Input.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
             <div class="header">
-                <h1 class="header-h1">To</h1>
-                <h1 class="header-h1-green">Do</h1>
+                <h1>To</h1>
+                <h1 class="header-green">Do</h1>
                 <h1>List</h1>
             </div>
             <div class="content-container">

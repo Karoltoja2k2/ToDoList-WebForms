@@ -14,32 +14,32 @@
                 ButtonValue="Form"
                 DefaultIsHidden="true" />
 
-            <div id="addToDoItemForm" class='<%= ContentWraper1.IsHidden ? "addToDoItemForm-hidden" : "addToDoItemForm" %>'>
-                <div class="addToDoItemRow">
+            <div id="addToDoItemForm" class='<%= ContentWraper1.IsHidden ? "form-hidden" : "form" %>'>
+                <div class="form-row">
                     <asp:Label ID="TitleLabel" Text="Title" runat="server" />
-                    <asp:TextBox ID="TitleTextBox" AutoPostBack="true" MaxLength="64" runat="server" class="addToDoItemRow-input"></asp:TextBox>
+                    <asp:TextBox ID="TitleTextBox" AutoPostBack="true" MaxLength="64" runat="server" class="default-input"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Title field is required" ControlToValidate="TitleTextBox" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
 
-                <div class="addToDoItemRow">
+                <div class="form-row">
                     <asp:Label ID="DescriptionLabel" Text="Description" runat="server" />
-                    <asp:TextBox ID="DescriptionTextBox" AutoPostBack="true" runat="server" MaxLength="4096" class="addToDoItemRow-textarea" mode="multiline" Wrap="true"></asp:TextBox>
+                    <asp:TextBox ID="DescriptionTextBox" AutoPostBack="true" runat="server" MaxLength="4096" CssClass="default-input form-textarea" mode="multiline" Wrap="true"></asp:TextBox>
                 </div>
 
-                <div class="addToDoItemRow">
+                <div class="form-row">
                     <asp:Label runat="server" Text="Due date" />
                     <uc1:DatePicker runat="server" ID="DueDatePicker" />
                 </div>
 
-                <div class="addToDoItemForm-buttons">
-                    <% if (CurrentToDoItemId != 0)
+                <div class="form-buttons">
+                    <% if (FormId != 0)
                         { %>
-                    <asp:Button ID="CancelButton" CssClass="addToDoItemForm-cancel-input" runat="server" OnClick="CancelUpdateHandler" Text="Cancel" />
-                    <asp:Button ID="UpdateButton" CssClass="addToDoItemForm-update-input" runat="server" OnClick="UpdateItemHandler" Text="Update" />
+                    <asp:Button ID="CancelButton" CssClass="form-buttons-cancel" runat="server" OnClick="CancelUpdateHandler" Text="Cancel" />
+                    <asp:Button ID="UpdateButton" CssClass="form-buttons-update" runat="server" OnClick="SubmitHandler" Text="Update" />
                     <% }
                         else
                         { %>
-                    <asp:Button ID="SubmitButton" CssClass="addToDoItemForm-submit-input" runat="server" OnClick="AddItemHandler" Text="Submit" />
+                    <asp:Button ID="SubmitButton" CssClass="form-buttons-submit" runat="server" OnClick="SubmitHandler" Text="Submit" />
                     <% } %>
                 </div>
             </div>
@@ -66,18 +66,18 @@
 
                 <div class="filter-item">
                     <asp:Label runat="server" Text="Title"></asp:Label>
-                    <asp:TextBox ID="TitleFilter" runat="server" AutoPostBack="true"></asp:TextBox>
+                    <asp:TextBox ID="TitleFilter" runat="server" AutoPostBack="true" CssClass="default-input"></asp:TextBox>
                 </div>
                 <div class="filter-item">
                     <asp:Label runat="server" Text="Description"></asp:Label>
-                    <asp:TextBox ID="DescriptionFilter" runat="server" AutoPostBack="true"></asp:TextBox>
+                    <asp:TextBox ID="DescriptionFilter" runat="server" AutoPostBack="true" CssClass="default-input"></asp:TextBox>
                 </div>
-                <div class="filter-item">
+                <div class="filter-item-date filter-item">
                     <asp:Label runat="server" Text="Due date from"></asp:Label>
                     <uc1:DatePicker runat="server" ID="DueDateFromFilter" />
                 </div>
 
-                <div class="filter-item">
+                <div class="filter-item filter-item-date">
                     <asp:Label runat="server" Text="Due date to"></asp:Label>
                     <uc1:DatePicker runat="server" ID="DueDateToFilter" />
                 </div>
@@ -98,9 +98,8 @@
                 ButtonValue="Items"
                 runat="server"
                 DefaultIsHidden="false" />
-
             <div class='<%= ContentWraper3.IsHidden ? "list-hidden" : "list" %>'>
-                <asp:GridView ID="GridView1" runat="server" ShowHeaderWhenEmpty="True" OnRowCommand="GridView1_RowCommand" DataSourceID="ObjectDataSource1" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" Width="100%" AutoGenerateColumns="False" CaptionAlign="Left" RowStyle-HorizontalAlign="Left">
+                <asp:GridView ID="GridView1" runat="server" ShowHeaderWhenEmpty="True"  OnRowCommand="ResultDisplayRowCommand" DataSourceID="ObjectDataSource1" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" Width="100%" AutoGenerateColumns="False" CaptionAlign="Left" RowStyle-HorizontalAlign="Left">
                     <Columns>
                         <asp:TemplateField HeaderText="Done" ItemStyle-CssClass="list-column-done">
                             <ItemTemplate>

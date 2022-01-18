@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DatePicker.ascx.cs" Inherits="ToDoList.UserControl.DatePicker" %>
 <link href="../Style/UserControl/DatePicker.css" rel="stylesheet" />
 
-<asp:TextBox ID="CalendarState" runat="server" style="display:none;"/>
+<asp:TextBox ID="CalendarState" runat="server" Style="display: none;" />
 <div class="calendar-values">
-    <asp:TextBox ID="CalendarValueTextBox" CssClass="addToDoItemRow-input" Enabled="false" runat="server"></asp:TextBox>
+    <asp:TextBox ID="CalendarValueTextBox" CssClass="default-input" Enabled="false" runat="server"></asp:TextBox>
     <asp:LinkButton ID="OpenCalendarButton" runat="server" OnClick="OpenCalendar" CssClass="calendar-values-trigger" CausesValidation="false">
         <i class="far fa-calendar-alt"></i>
     </asp:LinkButton>

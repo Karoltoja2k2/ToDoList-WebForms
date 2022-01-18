@@ -1,134 +1,91 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
-using ToDoList.DataLayer.Model;
-using ToDoList.DataLayer.Repository;
+using ToDoList.Presenter;
+using ToDoList.View;
 
 namespace ToDoList
 {
-    public partial class Default : System.Web.UI.Page
+    public partial class Default : Page, IDefaultView
     {
         private const string ItemIdAttribute = "ItemId";
 
         private const string IsDoneCheckboxId = "IsDoneCheckBoxWithItemId";
 
-        private IToDoItemRepository _repository;
+        private IDefaultViewPresenter _presenter;
 
-        protected int CurrentToDoItemId
+        public int FormId
         {
-            get => (int)ViewState[nameof(CurrentToDoItemId)];
-            set
-            {
-                ViewState[nameof(CurrentToDoItemId)] = value;
-            }       
+            get => (int)ViewState[nameof(FormId)];
+            set => ViewState[nameof(FormId)] = value;
+        }
+
+        public string FormTitle
+        {
+            get => TitleTextBox.Text;
+            set => TitleTextBox.Text = value;
+        }
+        public string FormDescription
+        {
+            get => DescriptionTextBox.Text;
+            set => DescriptionTextBox.Text = value;
+        }
+
+        public DateTime FormDueDate
+        {
+            get => DueDatePicker.selected;
+            set => DueDatePicker.selected = value;
+        }
+
+        public void UpdateResultDisplay()
+        {
+            GridView1.DataBind();
+        }
+
+        public void TriggerFormVisibility(bool visible)
+        {
+            ContentWraper1.IsHidden = !visible;
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _repository = new ToDoItemRepository();
+            _presenter = new DefaultViewPresenter(this);
             if (!IsPostBack)
             {
-                CurrentToDoItemId = 0;
+                FormId = 0;
             }
         }
 
-        protected void AddItemHandler(object sender, EventArgs e)
+        protected void SubmitHandler(object sender, EventArgs e)
         {
             if (!Page.IsValid) return;
-
-            var form = new ToDoItem
-            {
-                Id = 0,
-                Title = TitleTextBox.Text,
-                Description = DescriptionTextBox.Text,
-                CreatedBy = 1,
-                DueDate = DueDatePicker.selected,
-            };
-
-            _repository.Add(form);
-            ClearForm();
-            GridView1.DataBind();
-        }
-
-        protected void UpdateItemHandler(object sender, EventArgs e)
-        {
-            if (!Page.IsValid) return;
-
-            var form = new ToDoItem
-            {
-                Id = CurrentToDoItemId,
-                Title = TitleTextBox.Text,
-                Description = DescriptionTextBox.Text,
-                DueDate = DueDatePicker.selected,
-            };
-
-            _repository.Update(form);
-            GridView1.DataBind();
-            ClearForm();
+            _presenter.SubmitForm();
         }
 
         protected void CancelUpdateHandler(object sender, EventArgs e) =>
-            ClearForm();
+            _presenter.ClearForm();
 
         protected void IsDoneCheckBoxChangedHandler(object sender, EventArgs e)
         {
             var checkBox = (CheckBox)sender;
-            var id = checkBox?.Attributes[ItemIdAttribute];
-
-            if (!int.TryParse(id, out var idValue))
-            {
-                return;
-            }
-
-            _repository.UpdateIsDone(idValue, checkBox.Checked);
+            var id = GetIdFromControlWithItemId(checkBox);
+            _presenter.UpdateIsDone(id, checkBox.Checked);
         }
 
-        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            const string DeleteCommandName = "Delete";
-            if (e.CommandName.Equals(DeleteCommandName, StringComparison.OrdinalIgnoreCase))
-            {
-                var id = GetIdFromRowEvent(e);
-                _repository.Delete(id);
-                GridView1.DataBind();
-                e.Handled = true;
-
-                if (CurrentToDoItemId == id)
-                    ClearForm();
-                
-                return;
-            }
-
-            const string EditCommandName = "Edit";
-            if (e.CommandName.Equals(EditCommandName, StringComparison.OrdinalIgnoreCase))
-            {
-                var id = GetIdFromRowEvent(e);
-                SetFormData(_repository.GetById(id));
-                e.Handled = true;
-                ContentWraper1.IsHidden = false;
-                UpdatePanel1.DataBind();
-                return;
-            }
-        }
-
-        private void ClearForm() => 
-            SetFormData(new ToDoItem { DueDate = DateTime.Now });
-
-        private void SetFormData(ToDoItem item)
-        {
-            CurrentToDoItemId = item.Id;
-            TitleTextBox.Text = item.Title;
-            DescriptionTextBox.Text = item.Description;
-            DueDatePicker.selected = item.DueDate;
-        }
-
-        private int GetIdFromRowEvent(GridViewCommandEventArgs e)
+        protected void ResultDisplayRowCommand(object sender, GridViewCommandEventArgs e)
         {
             var row = ((GridView)e.CommandSource).Rows[int.Parse((string)e.CommandArgument)];
-            var txtSomething = row.FindControl(IsDoneCheckboxId);
-            var cb = (CheckBox)txtSomething;
-            return int.Parse(cb.Attributes[ItemIdAttribute]);
+            var itemId = GetIdFromControlWithItemId((WebControl)row.FindControl(IsDoneCheckboxId));
+            e.Handled = _presenter.OnRowCommand(itemId, e.CommandName);
+        }
+
+        private int GetIdFromControlWithItemId(WebControl control)
+        {
+            var id = control?.Attributes[ItemIdAttribute];
+            if (!int.TryParse(id, out var idValue))
+                throw new Exception();
+
+            return idValue;
         }
     }
 }
