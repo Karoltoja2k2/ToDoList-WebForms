@@ -24,7 +24,7 @@
 
                 <div class="form-row">
                     <asp:Label runat="server" Text="Due date" />
-                    <uc1:DatePicker runat="server" ID="DueDatePicker" />
+                    <uc1:DatePicker runat="server" ID="DueDatePicker" selected='<%# DateTime.Now %>' />
                 </div>
 
                 <div class="form-buttons">

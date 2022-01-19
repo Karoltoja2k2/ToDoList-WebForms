@@ -3,6 +3,8 @@ using System.Web.UI;
 
 namespace ToDoList.UserControl
 {
+    public delegate void OnDateChanged();
+
     public partial class DatePicker : System.Web.UI.UserControl
     {
         public DateTime selected
@@ -20,14 +22,13 @@ namespace ToDoList.UserControl
             set => ViewState[$"{nameof(IsHidden)}_{ID}"] = value;
         }
 
-        public DateTime? DefaultValue { get; set; }
+        public OnDateChanged OnDateChangedEvent;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 IsHidden = true;
-                selected = DefaultValue ?? DateTime.Now;
             }
         }
 
@@ -42,6 +43,7 @@ namespace ToDoList.UserControl
         protected void CalendarSelectionChangeHandler(object sender, EventArgs e)
         {
             selected = CalendarControl.SelectedDate;
+            OnDateChangedEvent?.Invoke();
             ChangeCalendarVisibility(false);
         }
 

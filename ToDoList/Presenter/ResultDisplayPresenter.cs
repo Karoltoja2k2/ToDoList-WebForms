@@ -22,6 +22,17 @@ namespace ToDoList.Presenter
             _view = view;
         }
 
+        public void SetResultDisplayData()
+        {
+            var data = _repository.Get(int.Parse(_view.IsDone),
+                _view.Title,
+                _view.Description,
+                _view.DueDateFrom,
+                _view.DueDateTo);
+
+            _view.DataSource = data;
+        }
+
         public void SetFormData(int toDoItemId)
         {
             _view.FormDataChanged(_repository.GetById(toDoItemId), true);
@@ -30,14 +41,14 @@ namespace ToDoList.Presenter
         public void DeleteToDoItem(int toDoItemId)
         {
             _repository.Delete(toDoItemId);
-
             _view.ResultDisplayDataChanged();
-            _view.FormDataChanged(new ToDoItem { DueDate = DateTime.Now }, false);
+            _view.FormDataChanged(new ToDoItem { DueDate = DateTime.Now });
         }
 
         public void UpdateIsDone(int toDoItemId, bool isDone)
         {
             _repository.UpdateIsDone(toDoItemId, isDone);
+            _view.ResultDisplayDataChanged();
         }
 
         public bool OnRowCommand(int id, string commandName)

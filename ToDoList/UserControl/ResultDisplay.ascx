@@ -14,7 +14,7 @@
             <div id="toDoItemFilters" class='<%= ContentWraper2.IsHidden ? "filter-hidden" : "filter" %>'>
                 <div class="filter-item">
                     <asp:Label runat="server" Text="Is done"></asp:Label>
-                    <asp:DropDownList ID="IsDoneFilter" runat="server" AutoPostBack="true">
+                    <asp:DropDownList ID="IsDoneFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterFieldChanged">
                         <asp:ListItem Value="0" Text="" Selected="True"></asp:ListItem>
                         <asp:ListItem Value="1">true</asp:ListItem>
                         <asp:ListItem Value="2">false</asp:ListItem>
@@ -23,32 +23,22 @@
 
                 <div class="filter-item">
                     <asp:Label runat="server" Text="Title"></asp:Label>
-                    <asp:TextBox ID="TitleFilter" runat="server" AutoPostBack="true" CssClass="default-input"></asp:TextBox>
+                    <asp:TextBox ID="TitleFilter" runat="server" AutoPostBack="true" OnTextChanged="FilterFieldChanged" CssClass="default-input"></asp:TextBox>
                 </div>
                 <div class="filter-item">
                     <asp:Label runat="server" Text="Description"></asp:Label>
-                    <asp:TextBox ID="DescriptionFilter" runat="server" AutoPostBack="true" CssClass="default-input"></asp:TextBox>
+                    <asp:TextBox ID="DescriptionFilter" runat="server" AutoPostBack="true" OnTextChanged="FilterFieldChanged" CssClass="default-input"></asp:TextBox>
                 </div>
                 <div class="filter-item-date filter-item">
                     <asp:Label runat="server" Text="Due date from"></asp:Label>
-                    <uc1:DatePicker runat="server" ID="DueDateFromFilter" DefaultValue='<%# DateTime.Now.ToMonthStart()%>'/>
+                    <uc1:DatePicker runat="server" ID="DueDateFromFilter"/>
                 </div>
 
                 <div class="filter-item filter-item-date">
                     <asp:Label runat="server" Text="Due date to"></asp:Label>
-                    <uc1:DatePicker runat="server" ID="DueDateToFilter" DefaultValue='<%# DateTime.Now.ToMonthEnd() %>' />
+                    <uc1:DatePicker runat="server" ID="DueDateToFilter"/>
                 </div>
             </div>
-
-            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="Get" TypeName="ToDoList.DataLayer.Repository.ToDoItemRepository">
-                <SelectParameters>
-                    <asp:ControlParameter ControlID="IsDoneFilter" DefaultValue="0" Name="isDone" PropertyName="SelectedValue" Type="Int32" />
-                    <asp:ControlParameter ControlID="TitleFilter" DefaultValue="" Name="title" PropertyName="Text" Type="String" />
-                    <asp:ControlParameter ControlID="DescriptionFilter" Name="description" PropertyName="Text" Type="String" DefaultValue="" />
-                    <asp:ControlParameter ControlID="DueDateFromFilter" Name="dueDateFrom" PropertyName="selected" Type="DateTime" />
-                    <asp:ControlParameter ControlID="DueDateToFilter" Name="dueDateTo" PropertyName="selected" Type="DateTime" />
-                </SelectParameters>
-            </asp:ObjectDataSource>
 
             <uc1:ContentWraper
                 ID="ContentWraper3"
@@ -56,30 +46,30 @@
                 runat="server"
                 DefaultIsHidden="false" />
             <div class='<%= ContentWraper3.IsHidden ? "list-hidden" : "list" %>'>
-                <asp:GridView ID="GridView1" runat="server" ShowHeaderWhenEmpty="True" ItemType="ToDoList.DataLayer.Model.ToDoItem"  OnRowCommand="ResultDisplayRowCommand" DataSourceID="ObjectDataSource1" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" Width="100%" AutoGenerateColumns="False" CaptionAlign="Left" RowStyle-HorizontalAlign="Left">
+                <asp:GridView ID="GridView1" DataSource='<%# DataSource %>' runat="server" ShowHeaderWhenEmpty="True" ItemType="ToDoList.DataLayer.Model.ToDoItem" OnRowCommand="ResultDisplayRowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" Width="100%" AutoGenerateColumns="False" CaptionAlign="Left" RowStyle-HorizontalAlign="Left">
                     <Columns>
                         <asp:TemplateField HeaderText="Done" ItemStyle-CssClass="list-column-done">
                             <ItemTemplate>
-                                <asp:CheckBox ID="IsDoneCheckBoxWithItemId" ItemId='<%# Item.Id %>' Checked='<%# (bool)Eval("IsDone") %>' OnCheckedChanged="IsDoneCheckBoxChangedHandler" runat="server" AutoPostBack="true" />
-                                <asp:HiddenField Value='<%# Item.Id %>' runat="server" />
+                                <asp:CheckBox ID="IsDoneCheckBoxWithItemId" ItemId='<%# Item.Id %>' Checked='<%# Item.IsDone %>' OnCheckedChanged="IsDoneCheckBoxChangedHandler" runat="server" AutoPostBack="true" />
+                                <%--<asp:HiddenField Value='<%# Item.Id %>' runat="server" />--%>
                             </ItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Title" ItemStyle-CssClass="list-column-title">
                             <ItemTemplate>
                                 <asp:Label ID="TitleLabel" CssClass="list-column-title"
-                                    Text='<%# Eval("Title") %>'
+                                    Text='<%# Item.Title %>'
                                     runat="server"
-                                    ToolTip='<%# Eval("Title") %>' />
+                                    ToolTip='<%# Item.Title %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Description" ItemStyle-CssClass="list-column-description">
                             <ItemTemplate>
                                 <asp:Label ID="DescriptionLabel" CssClass="list-column-description"
-                                    Text='<%# Eval("Description") %>'
+                                    Text='<%# Item.Description %>'
                                     runat="server"
-                                    ToolTip='<%# Eval("Description") %>' />
+                                    ToolTip='<%# Item.Description %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
 

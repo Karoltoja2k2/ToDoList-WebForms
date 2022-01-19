@@ -6,7 +6,7 @@ namespace ToDoList
 {
     public delegate void ResultDisplayDataChangedHandler();
 
-    public delegate void ToDoItemFormDataChangedHandler(ToDoItem item, bool visible);
+    public delegate void ToDoItemFormDataChangedHandler(ToDoItem item, bool? visible);
 
     public partial class Default : Page
     {
@@ -28,13 +28,14 @@ namespace ToDoList
 
         private void OnResultDisplayDataChanged()
         {
-            ResultDisplay.BindData();
+            ResultDisplay.RefreshData();
         }
 
-        public void OnFormDataChaned(ToDoItem toDoItem, bool visible)
+        public void OnFormDataChaned(ToDoItem toDoItem, bool? visible = null)
         {
             ToDoItemForm.SetFormData(toDoItem);
-            ToDoItemForm.TriggerForm(visible);
+            if (visible.HasValue)
+                ToDoItemForm.TriggerForm(visible.Value);
         }
     }
 }

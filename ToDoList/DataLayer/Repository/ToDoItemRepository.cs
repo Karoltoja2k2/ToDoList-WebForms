@@ -50,7 +50,7 @@ namespace ToDoList.DataLayer.Repository
         {
             var result = _context.ToDoItem.SingleOrDefault(x => x.Id == id);
             if (result != null)
-            {
+            {   
                 result.IsDone = isDone;
                 _context.SaveChanges();
             }
