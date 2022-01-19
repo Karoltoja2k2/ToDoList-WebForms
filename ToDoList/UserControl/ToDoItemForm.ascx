@@ -5,12 +5,12 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <uc1:ContentWraper
-                ID="ContentWraper1"
+                ID="FormWraper"
                 runat="server"
                 ButtonValue='<%# FormId == 0 ? "Add item" : "Update item" %>'
                 DefaultIsHidden="true" />
 
-            <div id="addToDoItemForm" class='<%= ContentWraper1.IsHidden ? "form-hidden" : "form" %>'>
+            <div id="addToDoItemForm" class='<%= FormWraper.IsHidden ? "form-hidden" : "form" %>'>
                 <div class="form-row">
                     <asp:Label ID="TitleLabel" Text="Title" runat="server" />
                     <asp:TextBox ID="TitleTextBox" AutoPostBack="true" MaxLength="64" runat="server" class="default-input"></asp:TextBox>

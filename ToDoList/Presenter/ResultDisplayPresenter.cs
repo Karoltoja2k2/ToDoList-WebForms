@@ -30,7 +30,7 @@ namespace ToDoList.Presenter
                 _view.DueDateFrom,
                 _view.DueDateTo);
 
-            _view.DataSource = data;
+            _view.SetDataSource(data);
         }
 
         public void SetFormData(int toDoItemId)

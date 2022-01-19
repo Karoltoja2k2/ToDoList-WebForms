@@ -54,7 +54,7 @@ namespace ToDoList.Presenter
             _view.FormTitle = item.Title;
             _view.FormDescription = item.Description;
             _view.FormDueDate = item.DueDate;
-            _view.BindData();
+            _view.RefreshWraper();
         }
     }
 }

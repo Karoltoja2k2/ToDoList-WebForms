@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ToDoList.DataLayer.Model;
 
 namespace ToDoList.View
@@ -15,9 +16,7 @@ namespace ToDoList.View
 
         DateTime DueDateTo { get; set; }
 
-        object DataSource { get; set; }
-
-        void RefreshData();
+        void SetDataSource(List<ToDoItem> data);
 
         void FormDataChanged(ToDoItem toDoItem, bool? isVisible = null);
 

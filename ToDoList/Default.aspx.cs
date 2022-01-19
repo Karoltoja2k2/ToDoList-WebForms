@@ -22,13 +22,9 @@ namespace ToDoList
             ResultDisplay.ResultDisplayDataChangedEvent += OnResultDisplayDataChanged;
         }
 
-        private void Test()
-        {
-        }
-
         private void OnResultDisplayDataChanged()
         {
-            ResultDisplay.RefreshData();
+            ResultDisplay.LoadData();
         }
 
         public void OnFormDataChaned(ToDoItem toDoItem, bool? visible = null)

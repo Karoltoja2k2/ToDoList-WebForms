@@ -24,13 +24,13 @@ namespace ToDoList.UserControl
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
 
         /// <summary>
-        /// ContentWraper2 control.
+        /// FiltersWraper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ContentWraper ContentWraper2;
+        protected global::ToDoList.UserControl.ContentWraper FiltersWraper;
 
         /// <summary>
         /// IsDoneFilter control.
@@ -78,13 +78,13 @@ namespace ToDoList.UserControl
         protected global::ToDoList.UserControl.DatePicker DueDateToFilter;
 
         /// <summary>
-        /// ContentWraper3 control.
+        /// ListWraper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ContentWraper ContentWraper3;
+        protected global::ToDoList.UserControl.ContentWraper ListWraper;
 
         /// <summary>
         /// GridView1 control.

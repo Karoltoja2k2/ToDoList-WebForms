@@ -24,13 +24,13 @@ namespace ToDoList.UserControl
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// ContentWraper1 control.
+        /// FormWraper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ContentWraper ContentWraper1;
+        protected global::ToDoList.UserControl.ContentWraper FormWraper;
 
         /// <summary>
         /// TitleLabel control.

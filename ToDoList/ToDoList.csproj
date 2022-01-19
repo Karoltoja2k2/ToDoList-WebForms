@@ -78,6 +78,7 @@
       <DependentUpon>ToDoList.mdf</DependentUpon>
     </Content>
     <Content Include="Default.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Style\Base\Input.css" />
     <Content Include="Style\Page\Default.css" />
     <Content Include="Style\UserControl\ContentWraper.css" />
@@ -101,6 +102,13 @@
     <Compile Include="DataLayer\Repository\ToDoItemRepository.cs" />
     <Compile Include="DataLayer\ToDoListDbContext.cs" />
     <Compile Include="Helper\DateTimeExtension.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Presenter\ResultDisplayPresenter.cs" />
     <Compile Include="Presenter\ToDoItemFormPresenter.cs" />
     <Compile Include="UserControl\ResultDisplay.ascx.cs">

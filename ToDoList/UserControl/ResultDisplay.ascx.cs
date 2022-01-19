@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using ToDoList.DataLayer.Model;
 using ToDoList.Helper;
@@ -49,7 +50,7 @@ namespace ToDoList.UserControl
             set => DueDateToFilter.selected = value;
         }
 
-        public object DataSource
+        protected object DataSource
         {
             get => GridView1.DataSource;
             set
@@ -59,7 +60,12 @@ namespace ToDoList.UserControl
             }
         }
 
-        public void RefreshData()
+        public void SetDataSource(List<ToDoItem> data)
+        {
+            DataSource = data;
+        }
+
+        public void LoadData()
         {
             _presenter.SetResultDisplayData();
         }
@@ -84,14 +90,14 @@ namespace ToDoList.UserControl
                 Description = string.Empty;
                 DueDateFrom = DateTime.Now.ToMonthStart();
                 DueDateTo = DateTime.Now.ToMonthEnd();
-                RefreshData();
+                LoadData();
             }
 
             DueDateFromFilter.OnDateChangedEvent += DateChangedHandler;
             DueDateToFilter.OnDateChangedEvent += DateChangedHandler;
         }
 
-        protected void DateChangedHandler() => RefreshData();
+        protected void DateChangedHandler() => LoadData();
 
         protected void FilterFieldChanged(object sender, EventArgs e) =>
             DateChangedHandler();

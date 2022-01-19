@@ -12,6 +12,6 @@ namespace ToDoList.View
 
         DateTime FormDueDate { get; set; }
 
-        void BindData();
+        void RefreshWraper();
     }
 }

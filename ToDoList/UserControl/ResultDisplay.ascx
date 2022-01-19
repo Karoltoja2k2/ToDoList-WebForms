@@ -6,12 +6,12 @@
 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
             <uc1:ContentWraper
-                ID="ContentWraper2"
+                ID="FiltersWraper"
                 ButtonValue="Filters"
                 runat="server"
                 DefaultIsHidden="true" />
 
-            <div id="toDoItemFilters" class='<%= ContentWraper2.IsHidden ? "filter-hidden" : "filter" %>'>
+            <div id="toDoItemFilters" class='<%= FiltersWraper.IsHidden ? "filter-hidden" : "filter" %>'>
                 <div class="filter-item">
                     <asp:Label runat="server" Text="Is done"></asp:Label>
                     <asp:DropDownList ID="IsDoneFilter" runat="server" AutoPostBack="true" OnSelectedIndexChanged="FilterFieldChanged">
@@ -41,17 +41,17 @@
             </div>
 
             <uc1:ContentWraper
-                ID="ContentWraper3"
+                ID="ListWraper"
                 ButtonValue="Items"
                 runat="server"
                 DefaultIsHidden="false" />
-            <div class='<%= ContentWraper3.IsHidden ? "list-hidden" : "list" %>'>
+
+            <div class='<%= ListWraper.IsHidden ? "list-hidden" : "list" %>'>
                 <asp:GridView ID="GridView1" DataSource='<%# DataSource %>' runat="server" ShowHeaderWhenEmpty="True" ItemType="ToDoList.DataLayer.Model.ToDoItem" OnRowCommand="ResultDisplayRowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" Width="100%" AutoGenerateColumns="False" CaptionAlign="Left" RowStyle-HorizontalAlign="Left">
                     <Columns>
                         <asp:TemplateField HeaderText="Done" ItemStyle-CssClass="list-column-done">
                             <ItemTemplate>
                                 <asp:CheckBox ID="IsDoneCheckBoxWithItemId" ItemId='<%# Item.Id %>' Checked='<%# Item.IsDone %>' OnCheckedChanged="IsDoneCheckBoxChangedHandler" runat="server" AutoPostBack="true" />
-                                <%--<asp:HiddenField Value='<%# Item.Id %>' runat="server" />--%>
                             </ItemTemplate>
                         </asp:TemplateField>
 

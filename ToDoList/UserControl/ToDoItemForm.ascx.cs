@@ -37,7 +37,7 @@ namespace ToDoList.UserControl
 
         public void TriggerForm(bool visible)
         {
-            ContentWraper1.IsHidden = !visible;
+            FormWraper.IsHidden = !visible;
         }
 
         public void SetFormData(ToDoItem item)
@@ -45,9 +45,9 @@ namespace ToDoList.UserControl
             _presenter.SetFormData(item);
         }
 
-        public void BindData()
+        public void RefreshWraper()
         {
-            ContentWraper1.DataBind();
+            FormWraper.DataBind();
         }
 
         protected void Page_Load(object sender, EventArgs e)
