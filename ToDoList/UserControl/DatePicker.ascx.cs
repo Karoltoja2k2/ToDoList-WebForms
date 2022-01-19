@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.UI;
-using ToDoList.View;
 
 namespace ToDoList.UserControl
 {
@@ -21,15 +20,14 @@ namespace ToDoList.UserControl
             set => ViewState[$"{nameof(IsHidden)}_{ID}"] = value;
         }
 
-
-        public DateTime DefaultValue { get; set; } = DateTime.Now;
+        public DateTime? DefaultValue { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 IsHidden = true;
-                selected = DefaultValue;
+                selected = DefaultValue ?? DateTime.Now;
             }
         }
 
@@ -47,11 +45,6 @@ namespace ToDoList.UserControl
             ChangeCalendarVisibility(false);
         }
 
-        private void ChangeCalendarVisibility(bool visible)
-        {
-            IsHidden = !visible;
-        }
-
         protected void OpenCalendar(object sender, EventArgs e)
         {
             ChangeCalendarVisibility(true);
@@ -60,6 +53,11 @@ namespace ToDoList.UserControl
         protected void CloseCalendar(object sender, EventArgs e)
         {
             ChangeCalendarVisibility(false);
+        }
+
+        private void ChangeCalendarVisibility(bool visible)
+        {
+            IsHidden = !visible;
         }
     }
 }

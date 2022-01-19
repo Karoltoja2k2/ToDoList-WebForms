@@ -84,6 +84,8 @@
     <Content Include="Style\UserControl\DatePicker.css" />
     <Content Include="UserControl\ContentWraper.ascx" />
     <Content Include="UserControl\DatePicker.ascx" />
+    <Content Include="UserControl\ResultDisplay.ascx" />
+    <Content Include="UserControl\ToDoItemForm.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +100,23 @@
     <Compile Include="DataLayer\Model\ToDoItem.cs" />
     <Compile Include="DataLayer\Repository\ToDoItemRepository.cs" />
     <Compile Include="DataLayer\ToDoListDbContext.cs" />
-    <Compile Include="Presenter\IDefaultViewPresenter.cs" />
-    <Compile Include="View\IDefaultView.cs" />
-    <Compile Include="Presenter\DefaultViewPresenter.cs" />
+    <Compile Include="Helper\DateTimeExtension.cs" />
+    <Compile Include="Presenter\ResultDisplayPresenter.cs" />
+    <Compile Include="Presenter\ToDoItemFormPresenter.cs" />
+    <Compile Include="UserControl\ResultDisplay.ascx.cs">
+      <DependentUpon>ResultDisplay.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ResultDisplay.ascx.designer.cs">
+      <DependentUpon>ResultDisplay.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ToDoItemForm.ascx.cs">
+      <DependentUpon>ToDoItemForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ToDoItemForm.ascx.designer.cs">
+      <DependentUpon>ToDoItemForm.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -123,6 +139,8 @@
     <Compile Include="UserControl\DatePicker.ascx.designer.cs">
       <DependentUpon>DatePicker.ascx</DependentUpon>
     </Compile>
+    <Compile Include="View\IToDoItemFormView.cs" />
+    <Compile Include="View\IResultDisplayView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.Master" />

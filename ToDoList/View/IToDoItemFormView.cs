@@ -2,7 +2,7 @@
 
 namespace ToDoList.View
 {
-    public interface IDefaultView
+    public interface IToDoItemFormView
     {
         int FormId { get; set; }
 
@@ -12,8 +12,6 @@ namespace ToDoList.View
 
         DateTime FormDueDate { get; set; }
 
-        void UpdateResultDisplay();
-
-        void TriggerFormVisibility(bool visible);
+        void BindData();
     }
 }

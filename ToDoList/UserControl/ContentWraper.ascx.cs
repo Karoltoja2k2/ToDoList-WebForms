@@ -9,7 +9,7 @@ namespace ToDoList.UserControl
 {
     public partial class ContentWraper : System.Web.UI.UserControl
     {
-        public string ButtonValue { get; set; }
+        public string ButtonValue { get => ButtonLabel.Text; set => ButtonLabel.Text = value; }
 
         public bool IsHidden
         {
@@ -25,8 +25,6 @@ namespace ToDoList.UserControl
             {
                 IsHidden = DefaultIsHidden;
             }
-
-            ButtonLabel.Text = ButtonValue;
         }
 
         protected void TriggerElem(object sender, EventArgs e)
