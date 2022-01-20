@@ -1,13 +1,14 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Pagination.ascx.cs" Inherits="ToDoList.UserControl.Pagination" %>
-<div>
-    <asp:DropDownList ID="PagesDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AmountPerPageChanged">
+<link href="../Style/UserControl/Pagination.css" rel="stylesheet" />
+<div class="pagination-container">
+    <asp:DropDownList ID="PagesDropDownList" runat="server" AutoPostBack="true" CssClass="container-item" OnSelectedIndexChanged="AmountPerPageChanged">
         <asp:ListItem Value="10">10</asp:ListItem>
         <asp:ListItem Value="20">20</asp:ListItem>
         <asp:ListItem Value="50">50</asp:ListItem>
         <asp:ListItem Value="100">100</asp:ListItem>
     </asp:DropDownList>
 
-    <div>
+    <div class="container-item">
         <asp:LinkButton ID="PreviousPageButton" runat="server" CommandArgument="-1" OnCommand="PageChangeCommand" CausesValidation="false" Text="<" />
         <asp:Label ID="CurrentPageLabel" runat="server"/>
         z

@@ -84,6 +84,7 @@
     <Content Include="Style\Page\Default.css" />
     <Content Include="Style\UserControl\ContentWraper.css" />
     <Content Include="Style\UserControl\DatePicker.css" />
+    <Content Include="Style\UserControl\Pagination.css" />
     <Content Include="Style\UserControl\ResultDisplay.css" />
     <Content Include="Style\UserControl\ToDoItemForm.css" />
     <Content Include="ToDoItems.aspx" />

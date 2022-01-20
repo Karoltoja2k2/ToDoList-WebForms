@@ -9,7 +9,6 @@
 <link href="../Style/UserControl/ResultDisplay.css" rel="stylesheet" />
 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
-
             <uc1:ResultDisplayFilter runat="server" id="ResultDisplayFilter" />
 
             <uc1:ContentWraper
@@ -18,8 +17,9 @@
                 runat="server"
                 DefaultIsHidden="false" />
 
+            <uc1:Pagination runat="server" id="Pagination" />
             <div class='<%= ListWraper.IsHidden ? "list-hidden" : "list" %>'>
-                <asp:GridView ID="GridView1" DataSource='<%# DataSource %>' runat="server" ShowHeaderWhenEmpty="True" ItemType="ToDoList.DataLayer.Model.ToDoItem" OnRowCommand="ResultDisplayRowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" Width="100%" AutoGenerateColumns="False" CaptionAlign="Left" RowStyle-HorizontalAlign="Left">
+                <asp:GridView ID="GridView1" CssClass="StickyHeader" DataSource='<%# DataSource %>' runat="server" ShowHeaderWhenEmpty="True" ItemType="ToDoList.DataLayer.Model.ToDoItem" OnRowCommand="ResultDisplayRowCommand" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" Width="100%" AutoGenerateColumns="False" CaptionAlign="Left" RowStyle-HorizontalAlign="Left">
                     <Columns>
                         <asp:TemplateField HeaderText="Done" ItemStyle-CssClass="list-column-done">
                             <ItemTemplate>
@@ -62,7 +62,5 @@
                     <SortedDescendingHeaderStyle BackColor="#242121" />
                 </asp:GridView>
             </div>
-
-            <uc1:Pagination runat="server" id="Pagination" />
         </ContentTemplate>
     </asp:UpdatePanel>

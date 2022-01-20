@@ -42,15 +42,6 @@ namespace ToDoList.UserControl
         protected global::ToDoList.UserControl.ContentWraper ListWraper;
 
         /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-
-        /// <summary>
         /// Pagination control.
         /// </summary>
         /// <remarks>
@@ -58,5 +49,14 @@ namespace ToDoList.UserControl
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ToDoList.UserControl.Pagination Pagination;
+
+        /// <summary>
+        /// GridView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView1;
     }
 }

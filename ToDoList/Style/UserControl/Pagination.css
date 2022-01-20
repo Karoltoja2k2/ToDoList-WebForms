@@ -1,0 +1,13 @@
+﻿.pagination-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height:50px;
+    width: 100%;
+    position: sticky;
+}
+
+.container-item{
+    width: 100px;
+}

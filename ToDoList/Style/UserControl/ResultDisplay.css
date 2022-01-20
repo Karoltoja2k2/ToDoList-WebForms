@@ -77,3 +77,8 @@ filter-item-date {
     border: none;
     cursor: pointer;
 }
+
+.StickyHeader th {
+    position: sticky;
+    top: 0
+}
