@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ToDoList.DataLayer.Model;
 using ToDoList.DataLayer.Repository;
 using ToDoList.View;
@@ -24,14 +25,17 @@ namespace ToDoList.Presenter
 
         public void SetResultDisplayData()
         {
-            var data = _repository.Get(_view.UserId,
+            var (total, items) = _repository.Get(_view.UserId,
                 int.Parse(_view.IsDone),
                 _view.Title,
                 _view.Description,
                 _view.DueDateFrom,
-                _view.DueDateTo);
+                _view.DueDateTo,
+                _view.CurrentPage,
+                _view.Amount);
 
-            _view.SetDataSource(data);
+            _view.SetDataSource(items);
+            _view.Total = total;
         }
 
         public void SetFormData(int toDoItemId)

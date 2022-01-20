@@ -11,52 +11,52 @@ namespace ToDoList.UserControl
 {
 
 
-    public partial class ResultDisplay
+    public partial class Pagination
     {
 
         /// <summary>
-        /// UpdatePanel2 control.
+        /// PagesDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::System.Web.UI.WebControls.DropDownList PagesDropDownList;
 
         /// <summary>
-        /// ResultDisplayFilter control.
+        /// PreviousPageButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ResultDisplayFilter ResultDisplayFilter;
+        protected global::System.Web.UI.WebControls.LinkButton PreviousPageButton;
 
         /// <summary>
-        /// ListWraper control.
+        /// CurrentPageLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ContentWraper ListWraper;
+        protected global::System.Web.UI.WebControls.Label CurrentPageLabel;
 
         /// <summary>
-        /// GridView1 control.
+        /// TotalPagesLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Label TotalPagesLabel;
 
         /// <summary>
-        /// Pagination control.
+        /// NextPageButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.Pagination Pagination;
+        protected global::System.Web.UI.WebControls.LinkButton NextPageButton;
     }
 }

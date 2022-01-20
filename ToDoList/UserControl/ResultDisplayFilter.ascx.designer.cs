@@ -11,52 +11,61 @@ namespace ToDoList.UserControl
 {
 
 
-    public partial class ResultDisplay
+    public partial class ResultDisplayFilter
     {
 
         /// <summary>
-        /// UpdatePanel2 control.
+        /// FiltersWraper control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        protected global::ToDoList.UserControl.ContentWraper FiltersWraper;
 
         /// <summary>
-        /// ResultDisplayFilter control.
+        /// IsDoneFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ResultDisplayFilter ResultDisplayFilter;
+        protected global::System.Web.UI.WebControls.DropDownList IsDoneFilter;
 
         /// <summary>
-        /// ListWraper control.
+        /// TitleFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ContentWraper ListWraper;
+        protected global::System.Web.UI.WebControls.TextBox TitleFilter;
 
         /// <summary>
-        /// GridView1 control.
+        /// DescriptionFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.TextBox DescriptionFilter;
 
         /// <summary>
-        /// Pagination control.
+        /// DueDateFromFilter control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.Pagination Pagination;
+        protected global::ToDoList.UserControl.DatePicker DueDateFromFilter;
+
+        /// <summary>
+        /// DueDateToFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ToDoList.UserControl.DatePicker DueDateToFilter;
     }
 }

@@ -1,50 +1,54 @@
 ﻿using System;
 using System.Web.UI;
 using ToDoList.DataLayer.Model;
-using ToDoList.DataLayer.Repository;
+using ToDoList.Presenter;
+using ToDoList.View;
 
 namespace ToDoList
 {
-    public partial class Default : Page
+    public partial class Default : Page, IDefaultView
     {
         public const string QueryStringUserIdKey = "id";
 
-        private IUserRepository _userRepository;
+        private DefaultViewPresenter _presenter;
+
+        public string UserName 
+        {
+            get => UsernameTextBox.Text;
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _userRepository = new UserRepository();
+            _presenter = new DefaultViewPresenter(this);
         }
 
-        protected void LoginClick(object sender, EventArgs e)
-        {
-            var userName = UsernameTextBox.Text;
-            var user = _userRepository.GetByName(userName);
-            if (user == null)
-            {
-                UserExistValidator.IsValid = false;
-                UserExistValidator.ErrorMessage = "User not found";
-                return;
-            }
+        protected void LoginClick(object sender, EventArgs e) =>
+            _presenter.OnLogin();
 
+        public void LoginSuccess(User user) =>
+            OnUserSelected(user);
+
+        public void UserNotFound() =>
+            UserExistValidatorFailed("User not found");
+
+        protected void RegisterClick(object sender, EventArgs e) =>
+            _presenter.OnRegisterClick();
+
+        public void RegisterSuccess(User user) =>
+            OnUserSelected(user);
+
+        public void UserAlreadyExist() =>
+            UserExistValidatorFailed("User already exists");
+
+        private void UserExistValidatorFailed(string message)
+        {
+            UserExistValidator.IsValid = false;
+            UserExistValidator.ErrorMessage = message;
+        }
+
+        private void OnUserSelected(User user)
+        {
             Master.UserName = user.Name;
-            Response.Redirect($"ToDoItems.aspx?{QueryStringUserIdKey}={user.Id}");
-        }
-        
-        protected void RegisterClick(object sender, EventArgs e)
-        {
-            var userName = UsernameTextBox.Text;
-            var user = _userRepository.GetByName(userName);
-            if (user != null)
-            {
-                UserExistValidator.IsValid = false;
-                UserExistValidator.ErrorMessage = $"User already exist";
-                return;
-            }
-
-            user = new User { Name = userName };
-            user.Id = _userRepository.Add(user);
-            Master.UserName = userName;
             Response.Redirect($"ToDoItems.aspx?{QueryStringUserIdKey}={user.Id}");
         }
     }

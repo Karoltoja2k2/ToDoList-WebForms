@@ -89,7 +89,9 @@
     <Content Include="ToDoItems.aspx" />
     <Content Include="UserControl\ContentWraper.ascx" />
     <Content Include="UserControl\DatePicker.ascx" />
+    <Content Include="UserControl\Pagination.ascx" />
     <Content Include="UserControl\ResultDisplay.ascx" />
+    <Content Include="UserControl\ResultDisplayFilter.ascx" />
     <Content Include="UserControl\ToDoItemForm.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -114,6 +116,7 @@
       <DependentUpon>202201200925320_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Presenter\DefaultViewPresenter.cs" />
     <Compile Include="Presenter\ResultDisplayPresenter.cs" />
     <Compile Include="Presenter\ToDoItemFormPresenter.cs" />
     <Compile Include="ToDoItems.aspx.cs">
@@ -123,12 +126,26 @@
     <Compile Include="ToDoItems.aspx.designer.cs">
       <DependentUpon>ToDoItems.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UserControl\Pagination.ascx.cs">
+      <DependentUpon>Pagination.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Pagination.ascx.designer.cs">
+      <DependentUpon>Pagination.ascx</DependentUpon>
+    </Compile>
     <Compile Include="UserControl\ResultDisplay.ascx.cs">
       <DependentUpon>ResultDisplay.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\ResultDisplay.ascx.designer.cs">
       <DependentUpon>ResultDisplay.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ResultDisplayFilter.ascx.cs">
+      <DependentUpon>ResultDisplayFilter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ResultDisplayFilter.ascx.designer.cs">
+      <DependentUpon>ResultDisplayFilter.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControl\ToDoItemForm.ascx.cs">
       <DependentUpon>ToDoItemForm.ascx</DependentUpon>
@@ -159,6 +176,9 @@
     <Compile Include="UserControl\DatePicker.ascx.designer.cs">
       <DependentUpon>DatePicker.ascx</DependentUpon>
     </Compile>
+    <Compile Include="View\IDefaultView.cs" />
+    <Compile Include="View\IResultDisplayFilterView.cs" />
+    <Compile Include="View\IPaginationView.cs" />
     <Compile Include="View\IToDoItemFormView.cs" />
     <Compile Include="View\IResultDisplayView.cs" />
   </ItemGroup>

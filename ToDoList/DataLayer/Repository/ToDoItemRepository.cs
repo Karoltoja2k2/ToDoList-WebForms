@@ -12,12 +12,14 @@ namespace ToDoList.DataLayer.Repository
 
         void UpdateIsDone(int id, bool isDone);
 
-        List<ToDoItem> Get(int userId, 
+        (int total, List<ToDoItem> items) Get(int userId, 
             int isDone,
             string title,
             string description,
             DateTime? dueDateFrom,
-            DateTime? dueDateTo);
+            DateTime? dueDateTo,
+            int currentPage,
+            int amount);
 
         void Delete(int id);
 
@@ -63,12 +65,14 @@ namespace ToDoList.DataLayer.Repository
             _context.SaveChanges();
         }
 
-        public List<ToDoItem> Get(int userId,
+        public (int total, List<ToDoItem> items) Get(int userId,
             int isDone,
             string title,
             string description,
             DateTime? dueDateFrom,
-            DateTime? dueDateTo)
+            DateTime? dueDateTo,
+            int currentPage,
+            int amount)
         {
             bool? filter = null;
             switch (isDone)
@@ -95,7 +99,13 @@ namespace ToDoList.DataLayer.Repository
             if (dueDateTo != null)
                 query = query.Where(x => x.DueDate <= dueDateTo.Value);
 
-            return query.OrderBy(x => x.DueDate).ToList();
+            var total = query.Count();
+            var items = query.OrderBy(x => x.DueDate)
+                .Skip(amount * (currentPage - 1))
+                .Take(amount)
+                .ToList();
+
+            return (total, items);
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using ToDoList.DataLayer.Model;
-using ToDoList.Helper;
 using ToDoList.Presenter;
 using ToDoList.View;
 
@@ -10,8 +9,6 @@ namespace ToDoList.UserControl
 {
     public partial class ResultDisplay : System.Web.UI.UserControl, IResultDisplayView
     {
-        private ResultDisplayPresenter _presenter;
-
         public ToDoItemFormDataChangedHandler ToDoItemFormDataChangedEvent;
 
         public ResultDisplayDataChangedHandler ResultDisplayDataChangedEvent;
@@ -20,40 +17,27 @@ namespace ToDoList.UserControl
 
         private const string IsDoneCheckboxId = "IsDoneCheckBoxWithItemId";
 
-        public int UserId
-        {
-            get => (int)ViewState[nameof(UserId)];
-        }
+        private ResultDisplayPresenter _presenter;
 
-        public string IsDone
-        {
-            get => IsDoneFilter.SelectedValue;
-            set => IsDoneFilter.SelectedValue = value;
-        }
+        #region view properties
 
-        public string Title
-        {
-            get => TitleFilter.Text;
-            set => TitleFilter.Text = value;
-        }
+        public int UserId { get => (int)ViewState[nameof(UserId)]; }
 
-        public string Description
-        {
-            get => DescriptionFilter.Text;
-            set => DescriptionFilter.Text = value;
-        }
+        public string IsDone { get => ResultDisplayFilter.IsDone; }
 
-        public DateTime DueDateFrom
-        {
-            get => DueDateFromFilter.selected;
-            set => DueDateFromFilter.selected = value;
-        }
+        public string Title { get => ResultDisplayFilter.Title; }
 
-        public DateTime DueDateTo
-        {
-            get => DueDateToFilter.selected;
-            set => DueDateToFilter.selected = value;
-        }
+        public string Description { get => ResultDisplayFilter.Description; }
+
+        public DateTime DueDateFrom { get => ResultDisplayFilter.DueDateFrom; }
+
+        public DateTime DueDateTo { get => ResultDisplayFilter.DueDateTo; }
+
+        public int Total { get => Pagination.Total; set => Pagination.UpdateTotal(value); }
+
+        public int Amount { get => Pagination.Amount; }
+
+        public int CurrentPage { get => Pagination.CurrentPage; }
 
         protected object DataSource
         {
@@ -65,11 +49,19 @@ namespace ToDoList.UserControl
             }
         }
 
+        #endregion
+
         public void SetUserId(int value) => ViewState[nameof(UserId)] = value;
 
         public void SetDataSource(List<ToDoItem> data) => DataSource = data;
 
         public void LoadData() => _presenter.SetResultDisplayData();
+
+        public void FilterChanged()
+        {
+            Pagination.CurrentPage = 1;
+            _presenter.SetResultDisplayData();
+        }
 
         public void FormDataChanged(ToDoItem toDoItem, bool? isVisible = null) =>
             ToDoItemFormDataChangedEvent?.Invoke(toDoItem, isVisible);
@@ -78,25 +70,20 @@ namespace ToDoList.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _presenter = new ResultDisplayPresenter(this);
             if (!Page.IsPostBack)
             {
-                IsDone = "0";
-                Title = string.Empty;
-                Description = string.Empty;
-                DueDateFrom = DateTime.Now.ToMonthStart();
-                DueDateTo = DateTime.Now.ToMonthEnd();
-                LoadData();
+                Pagination.CurrentPage = 1;
             }
 
-            DueDateFromFilter.OnDateChangedEvent += DateChangedHandler;
-            DueDateToFilter.OnDateChangedEvent += DateChangedHandler;
+            _presenter = new ResultDisplayPresenter(this);
+            ResultDisplayFilter.FilterChangedEvent += FilterChanged;
+            Pagination.PageChangedEvent += PageChangedHandler;
         }
 
-        protected void DateChangedHandler() => LoadData();
-
-        protected void FilterFieldChanged(object sender, EventArgs e) =>
-            DateChangedHandler();
+        private void PageChangedHandler()
+        {
+            _presenter.SetResultDisplayData();
+        }
 
         protected void IsDoneCheckBoxChangedHandler(object sender, EventArgs e)
         {

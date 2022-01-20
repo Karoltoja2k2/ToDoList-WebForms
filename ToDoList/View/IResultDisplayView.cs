@@ -8,15 +8,21 @@ namespace ToDoList.View
     {
         int UserId { get; }
 
-        string IsDone { get; set; }
+        string IsDone { get; }
 
-        string Title { get; set; }
+        string Title { get; }
 
-        string Description { get; set; }
+        string Description { get; }
 
-        DateTime DueDateFrom { get; set; }
+        DateTime DueDateFrom { get; }
 
-        DateTime DueDateTo { get; set; }
+        DateTime DueDateTo { get; }
+
+        int Total { get; set; }
+
+        int Amount { get; }
+
+        int CurrentPage { get; }
 
         void SetDataSource(List<ToDoItem> data);
 
