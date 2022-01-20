@@ -19,7 +19,12 @@ namespace ToDoList.UserControl
         private const string ItemIdAttribute = "ItemId";
 
         private const string IsDoneCheckboxId = "IsDoneCheckBoxWithItemId";
-        
+
+        public int UserId
+        {
+            get => (int)ViewState[nameof(UserId)];
+        }
+
         public string IsDone
         {
             get => IsDoneFilter.SelectedValue;
@@ -60,25 +65,16 @@ namespace ToDoList.UserControl
             }
         }
 
-        public void SetDataSource(List<ToDoItem> data)
-        {
-            DataSource = data;
-        }
+        public void SetUserId(int value) => ViewState[nameof(UserId)] = value;
 
-        public void LoadData()
-        {
-            _presenter.SetResultDisplayData();
-        }
+        public void SetDataSource(List<ToDoItem> data) => DataSource = data;
 
-        public void FormDataChanged(ToDoItem toDoItem, bool? isVisible = null)
-        {
+        public void LoadData() => _presenter.SetResultDisplayData();
+
+        public void FormDataChanged(ToDoItem toDoItem, bool? isVisible = null) =>
             ToDoItemFormDataChangedEvent?.Invoke(toDoItem, isVisible);
-        }
 
-        public void ResultDisplayDataChanged()
-        {
-            ResultDisplayDataChangedEvent?.Invoke();
-        }
+        public void ResultDisplayDataChanged() => ResultDisplayDataChangedEvent?.Invoke();
 
         protected void Page_Load(object sender, EventArgs e)
         {

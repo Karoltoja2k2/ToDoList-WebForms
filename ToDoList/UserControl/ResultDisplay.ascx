@@ -2,7 +2,7 @@
 <%@ Register Src="~/UserControl/ContentWraper.ascx" TagPrefix="uc1" TagName="ContentWraper" %>
 <%@ Register Src="~/UserControl/DatePicker.ascx" TagPrefix="uc1" TagName="DatePicker" %>
 <%@ Import Namespace="ToDoList.Helper" %>
-
+<link href="../Style/UserControl/ResultDisplay.css" rel="stylesheet" />
 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
         <ContentTemplate>
             <uc1:ContentWraper

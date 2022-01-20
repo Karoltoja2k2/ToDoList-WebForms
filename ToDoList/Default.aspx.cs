@@ -1,37 +1,51 @@
 ﻿using System;
 using System.Web.UI;
 using ToDoList.DataLayer.Model;
+using ToDoList.DataLayer.Repository;
 
 namespace ToDoList
 {
-    public delegate void ResultDisplayDataChangedHandler();
-
-    public delegate void ToDoItemFormDataChangedHandler(ToDoItem item, bool? visible);
-
     public partial class Default : Page
     {
+        public const string QueryStringUserIdKey = "id";
+
+        private IUserRepository _userRepository;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            _userRepository = new UserRepository();
+        }
+
+        protected void LoginClick(object sender, EventArgs e)
+        {
+            var userName = UsernameTextBox.Text;
+            var user = _userRepository.GetByName(userName);
+            if (user == null)
             {
-                Page.DataBind();
+                UserExistValidator.IsValid = false;
+                UserExistValidator.ErrorMessage = "User not found";
+                return;
             }
 
-            ToDoItemForm.ResultDisplayDataChangedEvent += OnResultDisplayDataChanged;
-            ResultDisplay.ToDoItemFormDataChangedEvent += OnFormDataChaned;
-            ResultDisplay.ResultDisplayDataChangedEvent += OnResultDisplayDataChanged;
+            Master.UserName = user.Name;
+            Response.Redirect($"ToDoItems.aspx?{QueryStringUserIdKey}={user.Id}");
         }
-
-        private void OnResultDisplayDataChanged()
+        
+        protected void RegisterClick(object sender, EventArgs e)
         {
-            ResultDisplay.LoadData();
-        }
+            var userName = UsernameTextBox.Text;
+            var user = _userRepository.GetByName(userName);
+            if (user != null)
+            {
+                UserExistValidator.IsValid = false;
+                UserExistValidator.ErrorMessage = $"User already exist";
+                return;
+            }
 
-        public void OnFormDataChaned(ToDoItem toDoItem, bool? visible = null)
-        {
-            ToDoItemForm.SetFormData(toDoItem);
-            if (visible.HasValue)
-                ToDoItemForm.TriggerForm(visible.Value);
+            user = new User { Name = userName };
+            user.Id = _userRepository.Add(user);
+            Master.UserName = userName;
+            Response.Redirect($"ToDoItems.aspx?{QueryStringUserIdKey}={user.Id}");
         }
     }
 }

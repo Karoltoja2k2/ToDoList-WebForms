@@ -24,7 +24,8 @@ namespace ToDoList.Presenter
 
         public void SetResultDisplayData()
         {
-            var data = _repository.Get(int.Parse(_view.IsDone),
+            var data = _repository.Get(_view.UserId,
+                int.Parse(_view.IsDone),
                 _view.Title,
                 _view.Description,
                 _view.DueDateFrom,
@@ -35,7 +36,7 @@ namespace ToDoList.Presenter
 
         public void SetFormData(int toDoItemId)
         {
-            _view.FormDataChanged(_repository.GetById(toDoItemId), true);
+            _view.FormDataChanged(_repository.Get(toDoItemId), true);
         }
 
         public void DeleteToDoItem(int toDoItemId)

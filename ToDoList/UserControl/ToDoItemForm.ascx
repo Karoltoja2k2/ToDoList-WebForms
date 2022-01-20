@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ToDoItemForm.ascx.cs" Inherits="ToDoList.UserControl.ToDoItemForm" %>
 <%@ Register Src="~/UserControl/DatePicker.ascx" TagPrefix="uc1" TagName="DatePicker" %>
 <%@ Register Src="~/UserControl/ContentWraper.ascx" TagPrefix="uc1" TagName="ContentWraper" %>
-
+<link href="../Style/UserControl/ToDoItemForm.css" rel="stylesheet" />
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <uc1:ContentWraper

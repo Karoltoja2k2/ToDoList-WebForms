@@ -29,8 +29,8 @@ namespace ToDoList.Presenter
                 Id = _view.FormId,
                 Title = _view.FormTitle,
                 Description = _view.FormDescription,
-                CreatedBy = 1,
                 DueDate = _view.FormDueDate,
+                AssignedTo = _view.UserId,
             };
 
             if (form.Id == 0)

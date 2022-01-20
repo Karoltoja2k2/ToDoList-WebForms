@@ -1,0 +1,55 @@
+﻿.form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+}
+
+.form-hidden {
+    display: none;
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.form-buttons-submit {
+    width: 100px;
+    border: none;
+    border-bottom: 2px solid green;
+    background-color: white;
+    font-size: 24px;
+}
+
+.form-buttons-update {
+    width: 100px;
+    border: none;
+    border-bottom: 2px solid orange;
+    background-color: white;
+    font-size: 24px;
+}
+
+.form-buttons-cancel {
+    width: 100px;
+    border: none;
+    border-bottom: 2px solid red;
+    background-color: white;
+    font-size: 24px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 5px 0 5px 0
+}
+
+.form-row label {
+    width: 100%;
+}
+
+.form-textarea {
+    height: 100px;
+    line-height: 14px;
+}

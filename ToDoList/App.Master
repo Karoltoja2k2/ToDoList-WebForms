@@ -7,16 +7,25 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <link href="Style/Page/Default.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/a7e04b6430.js" crossorigin="anonymous"></script>
     <link href="Style/Base/Input.css" rel="stylesheet" />
+    <link href="Style/Page/App.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
-            <div class="header">
-                <h1>To</h1>
-                <h1 class="header-green">Do</h1>
-                <h1>List</h1>
+        <div class="header">
+            <div class="header-title">
+                <asp:Button runat="server" Text="To" OnClick="HeaderButton_Click" CausesValidation="false" AutoPostBack="true"/>
+                <asp:Button runat="server" Text="Do" CssClass="title-green" OnClick="HeaderButton_Click" CausesValidation="false" AutoPostBack="true"/>
+                <asp:Button runat="server" Text="List" OnClick="HeaderButton_Click" CausesValidation="false" AutoPostBack="true"/>
+            </div>
+            <% if (!string.IsNullOrEmpty(UserName)) { %>
+                    <div class="header-user-container">
+                        <asp:Label runat="server" Text="Username:" CssClass="header-user-title"/>
+                        <asp:Label runat="server" Text='<%# UserName %>' CssClass="header-user"/>
+                    </div>
+            <% } %>
+
             </div>
             <div class="content-container">
                 <div class="content">

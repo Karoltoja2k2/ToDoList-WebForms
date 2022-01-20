@@ -12,6 +12,12 @@ namespace ToDoList.UserControl
 
         public event ResultDisplayDataChangedHandler ResultDisplayDataChangedEvent;
 
+        public int UserId
+        {
+            get => (int)ViewState[nameof(UserId)];
+            private set => ViewState[nameof(UserId)] = value;
+        }
+
         public int FormId
         {
             get => (int) (ViewState[$"{nameof(FormId)}_{ID}"] ?? 0);
@@ -35,20 +41,13 @@ namespace ToDoList.UserControl
             set => DueDatePicker.selected = value;
         }
 
-        public void TriggerForm(bool visible)
-        {
-            FormWraper.IsHidden = !visible;
-        }
+        public void SetUserId(int value) => UserId = value;
 
-        public void SetFormData(ToDoItem item)
-        {
-            _presenter.SetFormData(item);
-        }
+        public void TriggerForm(bool visible) => FormWraper.IsHidden = !visible;
 
-        public void RefreshWraper()
-        {
-            FormWraper.DataBind();
-        }
+        public void SetFormData(ToDoItem item) => _presenter.SetFormData(item);
+
+        public void RefreshWraper() => FormWraper.DataBind();
 
         protected void Page_Load(object sender, EventArgs e)
         {

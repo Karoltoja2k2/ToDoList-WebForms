@@ -6,6 +6,8 @@ namespace ToDoList.View
 {
     public interface IResultDisplayView
     {
+        int UserId { get; }
+
         string IsDone { get; set; }
 
         string Title { get; set; }

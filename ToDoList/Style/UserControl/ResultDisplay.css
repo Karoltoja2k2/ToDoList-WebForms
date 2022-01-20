@@ -1,0 +1,79 @@
+﻿.filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    max-width: 100%;
+}
+
+.filter-hidden {
+    display: none;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+}
+
+filter-item-date {
+    width: 100px;
+}
+
+.list {
+    display: table;
+    width: 100%;
+}
+
+.list-hidden {
+    display: none;
+}
+
+.list-column-done {
+    width: 30px;
+    max-width: 30px;
+}
+
+.list-column-title {
+    width: 150px;
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.list-column-description {
+    width: 250px;
+    max-width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.list-column-dueDate {
+    width: 50px;
+    max-width: 50px;
+}
+
+.list-column-delete {
+    width: 75px;
+    max-width: 75px;
+}
+
+.list-cell-delete {
+    background-color: white;
+    color: red;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.list-column-edit {
+    width: 45px;
+    max-width: 45px;
+}
+
+.list-cell-edit {
+    background-color: white;
+    color: orange;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}

@@ -6,35 +6,32 @@ using ToDoList.DataLayer.Model;
 
 namespace ToDoList.DataLayer.Repository
 {
-    public interface IToDoItemRepository
+    public interface IToDoItemRepository: IRepositoryBase<ToDoItem>
     {
         int Add(ToDoItem item);
 
         void UpdateIsDone(int id, bool isDone);
 
-        List<ToDoItem> Get(int isDone,
+        List<ToDoItem> Get(int userId, 
+            int isDone,
             string title,
             string description,
             DateTime? dueDateFrom,
             DateTime? dueDateTo);
-
-        ToDoItem GetById(int id);
 
         void Delete(int id);
 
         void Update(ToDoItem item);
     }
 
-    public class ToDoItemRepository : IToDoItemRepository
+    public class ToDoItemRepository : RepositoryBase<ToDoItem>,  IToDoItemRepository
     {
-        private readonly ToDoListDbContext _context = new ToDoListDbContext();
-
-        public int Add(ToDoItem item)
+        public ToDoItemRepository()
+            : base (new ToDoListDbContext())
         {
-            var id = _context.ToDoItem.Add(item).Id;
-            _context.SaveChanges();
-            return id;
         }
+
+        private ToDoListDbContext _context { get => (ToDoListDbContext)Context; }
 
         public void Delete(int id)
         {
@@ -66,12 +63,8 @@ namespace ToDoList.DataLayer.Repository
             _context.SaveChanges();
         }
 
-        public ToDoItem GetById(int id)
-        {
-            return _context.ToDoItem.FirstOrDefault(x => x.Id == id);
-        }
-
-        public List<ToDoItem> Get(int isDone,
+        public List<ToDoItem> Get(int userId,
+            int isDone,
             string title,
             string description,
             DateTime? dueDateFrom,
@@ -84,7 +77,11 @@ namespace ToDoList.DataLayer.Repository
                 case 2: filter = false; break;  
             }
             
-            var query = _context.ToDoItem.AsQueryable();
+            var query = _context
+                .ToDoItem
+                .AsQueryable()
+                .Where(x => x.AssignedTo == userId);
+
             if (filter.HasValue)
                 query = query.Where(x => x.IsDone == filter.Value);
 

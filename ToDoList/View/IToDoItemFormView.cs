@@ -4,6 +4,8 @@ namespace ToDoList.View
 {
     public interface IToDoItemFormView
     {
+        int UserId { get; }
+     
         int FormId { get; set; }
 
         string FormTitle { get; set; }

@@ -1,0 +1,59 @@
+﻿html, body, form {
+    margin: 0px;
+    height: 100%;
+}
+
+.header {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 50px 0 50px;
+}
+
+.header-title {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-title input {
+    cursor: pointer;
+    font-size: 32px;
+    font-family: 'Agency FB';
+    font-weight: 900;
+    padding: 0px;
+    border: none;
+    background-color: white;
+}
+
+.title-green {
+    color: green;
+}
+
+.header-user-container {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Agency FB';
+}
+
+.header-user-title {
+    font-size: 22px;
+    color: darkgray;
+}
+
+.header-user {
+    font-size: 24px
+}
+
+.content-container {
+    height:100%;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    width: 700px;
+}
