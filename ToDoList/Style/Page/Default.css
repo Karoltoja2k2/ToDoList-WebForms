@@ -35,13 +35,13 @@
 .buttons-login {
     text-align: right;
     border:none;
-    border-bottom: 1px green solid;
+    border-bottom: 2px green solid;
 }
 
 .buttons-register {
     text-align: left;
     border: none;
-    border-bottom: 1px blue solid;
+    border-bottom: 2px blue solid;
 }
 
 .errors{

@@ -30,25 +30,16 @@ namespace ToDoList.UserControl
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton PreviousPageButton;
+        protected global::System.Web.UI.WebControls.Button PreviousPageButton;
 
         /// <summary>
-        /// CurrentPageLabel control.
+        /// PageLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CurrentPageLabel;
-
-        /// <summary>
-        /// TotalPagesLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TotalPagesLabel;
+        protected global::System.Web.UI.WebControls.Label PageLabel;
 
         /// <summary>
         /// NextPageButton control.
@@ -57,6 +48,6 @@ namespace ToDoList.UserControl
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton NextPageButton;
+        protected global::System.Web.UI.WebControls.Button NextPageButton;
     }
 }

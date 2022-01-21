@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DatePicker.ascx.cs" Inherits="ToDoList.UserControl.DatePicker" %>
 <link href="../Style/UserControl/DatePicker.css" rel="stylesheet" />
 
+<div style="display: flex; flex-direction:column;">
+
 <asp:TextBox ID="CalendarState" runat="server" Style="display: none;" />
 <div class="calendar-values">
     <asp:TextBox ID="CalendarValueTextBox" CssClass="default-input" Enabled="false" runat="server"></asp:TextBox>
@@ -8,7 +10,6 @@
         <i class="far fa-calendar-alt"></i>
     </asp:LinkButton>
 </div>
-<asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Please insert date in format day.month.year" ControlToValidate="CalendarValueTextBox" ForeColor="Red" OnServerValidate="DateTimeFormatValidator"></asp:CustomValidator>
 <div class='<%= IsHidden ? "calendar-container-hidden" : "calendar-container" %>'>
     <div class="calendar-exit-container">
         <asp:LinkButton runat="server" OnClick="CloseCalendar" CausesValidation="false" CssClass="calendar-exit">x</asp:LinkButton>
@@ -23,4 +24,5 @@
         <TitleStyle BackColor="Black" Font-Bold="True" Font-Size="13pt" ForeColor="White" Height="14pt" />
         <TodayDayStyle BackColor="#CCCC99" />
     </asp:Calendar>
+</div>
 </div>

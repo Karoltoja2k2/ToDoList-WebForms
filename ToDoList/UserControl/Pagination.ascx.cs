@@ -3,11 +3,11 @@ using ToDoList.View;
 
 namespace ToDoList.UserControl
 {
-    public delegate void PageChangedEvent();
+    public delegate void PaginationEvent();
 
     public partial class Pagination : System.Web.UI.UserControl, IPaginationView
     {
-        public PageChangedEvent PageChangedEvent;
+        public PaginationEvent PageChangedEvent;
 
         public int Amount
         { 
@@ -23,24 +23,25 @@ namespace ToDoList.UserControl
 
         public int TotalPages
         {
-            get => GetLastPageIndex();
-            set => TotalPagesLabel.Text = value.ToString();
+            get => (int)ViewState[nameof(TotalPages)];
+            set => ViewState[nameof(TotalPages)] = value;
         }
 
         public int CurrentPage
         {
-            get => int.Parse(CurrentPageLabel.Text);
-            set => CurrentPageLabel.Text = value.ToString();
+            get => (int)ViewState[nameof(CurrentPage)];
+            set => ViewState[nameof(CurrentPage)] = value;
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.Page.LoadComplete += (s, ev) => PageLabel.Text = $" {(TotalPages == 0 ? 0 : CurrentPage)} / {TotalPages} ";
         }
 
         public void UpdateTotal(int value)
         {
             Total = value;
-            TotalPages = GetLastPageIndex();
+            TotalPages = GetLastPageIndex(Amount, value);
         }
 
         protected void PageChangeCommand(object sender, System.Web.UI.WebControls.CommandEventArgs e)
@@ -61,10 +62,9 @@ namespace ToDoList.UserControl
             PageChangedEvent?.Invoke();
         }
 
-        private int GetLastPageIndex()
+        private static int GetLastPageIndex(int amount, int total)
         {
-            var amount = Amount;
-            return (Total + amount - 1) / amount;
+            return (total + amount - 1) / amount;
         }
     }
 }

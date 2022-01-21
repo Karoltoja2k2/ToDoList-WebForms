@@ -8,8 +8,6 @@ namespace ToDoList.DataLayer.Repository
 {
     public interface IToDoItemRepository: IRepositoryBase<ToDoItem>
     {
-        int Add(ToDoItem item);
-
         void UpdateIsDone(int id, bool isDone);
 
         (int total, List<ToDoItem> items) Get(int userId, 

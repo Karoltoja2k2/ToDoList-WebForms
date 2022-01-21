@@ -21,7 +21,11 @@ namespace ToDoList.UserControl
 
         #region view properties
 
-        public int UserId { get => (int)ViewState[nameof(UserId)]; }
+        public int UserId
+        {
+            get => (int)ViewState[nameof(UserId)];
+            set => ViewState[nameof(UserId)] = value;
+        }
 
         public string IsDone { get => ResultDisplayFilter.IsDone; }
 
@@ -37,30 +41,30 @@ namespace ToDoList.UserControl
 
         public int Amount { get => Pagination.Amount; }
 
-        public int CurrentPage { get => Pagination.CurrentPage; }
+        public int CurrentPage { get => Pagination.CurrentPage; set => Pagination.CurrentPage = value; }
 
         protected object DataSource
         {
-            get => GridView1.DataSource;
-            set
-            {
-                GridView1.DataSource = value;
-                GridView1.DataBind();
-            }
+            get => ViewState[nameof(DataSource)];
+            set => ViewState[nameof(DataSource)] = value;
         }
 
         #endregion
 
-        public void SetUserId(int value) => ViewState[nameof(UserId)] = value;
+        public void SetUserId(int value) => UserId = value;
 
         public void SetDataSource(List<ToDoItem> data) => DataSource = data;
 
-        public void LoadData() => _presenter.SetResultDisplayData();
+        public void ReloadData()
+        {
+            _presenter.SetResultDisplayData();
+            this.DataBind();
+        }
 
         public void FilterChanged()
         {
-            Pagination.CurrentPage = 1;
-            _presenter.SetResultDisplayData();
+            CurrentPage = 1;
+            ReloadData();
         }
 
         public void FormDataChanged(ToDoItem toDoItem, bool? isVisible = null) =>
@@ -80,11 +84,6 @@ namespace ToDoList.UserControl
             Pagination.PageChangedEvent += PageChangedHandler;
         }
 
-        private void PageChangedHandler()
-        {
-            _presenter.SetResultDisplayData();
-        }
-
         protected void IsDoneCheckBoxChangedHandler(object sender, EventArgs e)
         {
             var checkBox = (CheckBox)sender;
@@ -98,6 +97,8 @@ namespace ToDoList.UserControl
             var itemId = GetIdFromControlWithItemId((WebControl)row.FindControl(IsDoneCheckboxId));
             e.Handled = _presenter.OnRowCommand(itemId, e.CommandName);
         }
+
+        private void PageChangedHandler() => ReloadData();
 
         private int GetIdFromControlWithItemId(WebControl control)
         {

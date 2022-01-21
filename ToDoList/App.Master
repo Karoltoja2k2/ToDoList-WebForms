@@ -9,6 +9,7 @@
     </asp:ContentPlaceHolder>
     <script src="https://kit.fontawesome.com/a7e04b6430.js" crossorigin="anonymous"></script>
     <link href="Style/Base/Input.css" rel="stylesheet" />
+    <link href="Style/Base/DropDownList.css" rel="stylesheet" />
     <link href="Style/Page/App.css" rel="stylesheet" />
 </head>
 <body>

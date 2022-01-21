@@ -1,13 +1,39 @@
-﻿.pagination-container{
+﻿.pagination-row{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     height:50px;
     width: 100%;
-    position: sticky;
+}
+
+.pagination-container{
+    width: 200px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: space-evenly;
 }
 
 .container-item{
-    width: 100px;
+    text-align:center;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.container-item input{
+    font-family:'Agency FB';
+    font-weight: 900;
+    font-size: 22px;
+    color: green;
+    outline: none;
+    background-color:transparent;
+    border: none;
+    cursor:pointer;
+}
+
+.item-label{
+    margin: 0px 5px;    
 }

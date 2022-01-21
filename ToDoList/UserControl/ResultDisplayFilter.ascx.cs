@@ -45,29 +45,37 @@ namespace ToDoList.UserControl
 
         #endregion
 
+        public void LoadData() =>
+            FilterChangedEvent?.Invoke();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                IsDone = "0";
-                Title = string.Empty;
-                Description = string.Empty;
-                DueDateFrom = DateTime.Now.ToMonthStart();
-                DueDateTo = DateTime.Now.ToMonthEnd();
-                LoadData();
+                ResetFilters();
             }
 
-            DueDateFromFilter.OnDateChangedEvent += DateChangedHandler;
-            DueDateToFilter.OnDateChangedEvent += DateChangedHandler;
+            DueDateFromFilter.OnDateChangedEvent += OnFilterChange;
+            DueDateToFilter.OnDateChangedEvent += OnFilterChange;
         }
 
-        protected void DateChangedHandler() =>
+        protected void OnFilterChange() =>
             LoadData();
 
         protected void FilterFieldChanged(object sender, EventArgs e) =>
-            DateChangedHandler();
+            OnFilterChange();
 
-        public void LoadData() =>
-            FilterChangedEvent?.Invoke();
+        protected void ResetFiltersClick(object sender, EventArgs e) => 
+            ResetFilters();
+
+        private void ResetFilters()
+        {
+            IsDone = "0";
+            Title = string.Empty;
+            Description = string.Empty;
+            DueDateFrom = DateTime.Now.ToMonthStart();
+            DueDateTo = DateTime.Now.ToMonthEnd();
+            OnFilterChange();
+        }
     }
 }

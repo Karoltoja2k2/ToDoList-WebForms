@@ -17,11 +17,14 @@ namespace ToDoList
 
             if (!IsPostBack)
             {
-                var userId = int.Parse(Request.QueryString[Default.QueryStringUserIdKey]);
+                if (!int.TryParse(Request.QueryString[Default.QueryStringUserIdKey], out var userId))
+                    Response.Redirect("Default.aspx");
+
                 ResultDisplay.SetUserId(userId);
                 ToDoItemForm.SetUserId(userId);
                 Master.UserName = _userRepository.Get(userId).Name;
-                Page.DataBind();
+
+                LoadComplete += (s, ev) => Page.DataBind();
             }
 
             ToDoItemForm.ResultDisplayDataChangedEvent += OnResultDisplayDataChanged;
@@ -29,7 +32,7 @@ namespace ToDoList
             ResultDisplay.ResultDisplayDataChangedEvent += OnResultDisplayDataChanged;
         }
 
-        private void OnResultDisplayDataChanged() => ResultDisplay.LoadData();
+        private void OnResultDisplayDataChanged() => ResultDisplay.ReloadData();
 
         public void OnFormDataChaned(ToDoItem toDoItem, bool? visible = null)
         {

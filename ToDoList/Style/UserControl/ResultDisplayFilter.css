@@ -1,0 +1,53 @@
+﻿.filter {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    max-width: 100%;
+}
+
+.filter-hidden {
+    display: none;
+}
+
+.filter-row {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.row-input {
+    max-width: 300px;
+}
+
+.row-input input {
+    width: 300px;
+}
+
+.row-select {
+    max-width: 150px;
+}
+
+.row-select select {
+    max-width: 150px;
+    width: 150px;
+}
+
+.row-date {
+    max-width: 150px;
+}
+
+.row-date input{
+    width: 150px;
+}
+
+.row-reset {
+    border: none;
+    border-bottom: 2px solid blue;
+    background-color: transparent;
+    width: 100px;
+    height: 32px;
+    font-size: 24px;
+    padding: 0px;
+}

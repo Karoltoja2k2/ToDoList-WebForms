@@ -24,15 +24,6 @@ namespace ToDoList.UserControl
         protected global::ToDoList.UserControl.ContentWraper FiltersWraper;
 
         /// <summary>
-        /// IsDoneFilter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IsDoneFilter;
-
-        /// <summary>
         /// TitleFilter control.
         /// </summary>
         /// <remarks>
@@ -49,6 +40,15 @@ namespace ToDoList.UserControl
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DescriptionFilter;
+
+        /// <summary>
+        /// IsDoneFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IsDoneFilter;
 
         /// <summary>
         /// DueDateFromFilter control.
