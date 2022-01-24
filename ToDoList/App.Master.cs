@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web;
+using ToDoList.Helper;
 
 namespace ToDoList
 {
@@ -6,8 +8,7 @@ namespace ToDoList
     {
         public string UserName
         {
-            get => (string)ViewState[nameof(UserName)] ?? string.Empty;
-            set => ViewState[nameof(UserName)] = value;
+            get => (string)HttpContext.Current.Session[AppConst.UserNameSessionKey] ?? string.Empty;
         }
 
         protected void Page_Load(object sender, EventArgs e)

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Web;
 using System.Web.UI;
 using ToDoList.DataLayer.Model;
+using ToDoList.Helper;
 using ToDoList.Presenter;
 using ToDoList.View;
 
@@ -12,10 +14,11 @@ namespace ToDoList.UserControl
 
         public event ResultDisplayDataChangedHandler ResultDisplayDataChangedEvent;
 
+        private int _userId;
+
         public int UserId
         {
-            get => (int)ViewState[nameof(UserId)];
-            private set => ViewState[nameof(UserId)] = value;
+            get => _userId;
         }
 
         public int FormId
@@ -41,17 +44,15 @@ namespace ToDoList.UserControl
             set => DueDatePicker.selected = value;
         }
 
-        public void SetUserId(int value) => UserId = value;
-
-        public void TriggerForm(bool visible) => FormWraper.IsHidden = !visible;
-
-        public void SetFormData(ToDoItem item) => _presenter.SetFormData(item);
+        public void SetFormId(int id) =>
+            _presenter.SetFormData(id);
 
         public void RefreshWraper() => FormWraper.DataBind();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             _presenter = new ToDoItemFormPresenter(this);
+            _userId = AppSession.GetUserId();
             if (!Page.IsPostBack)
                 FormId = 0;
         }

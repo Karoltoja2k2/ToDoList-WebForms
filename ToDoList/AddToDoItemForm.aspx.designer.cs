@@ -11,7 +11,7 @@ namespace ToDoList
 {
 
 
-    public partial class ToDoItems
+    public partial class AddToDoItemForm
     {
 
         /// <summary>
@@ -24,26 +24,12 @@ namespace ToDoList
         protected global::System.Web.UI.ScriptManager sm;
 
         /// <summary>
-        /// ResultDisplay control.
+        /// ToDoItemForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ResultDisplay ResultDisplay;
-
-        /// <summary>
-        /// Master property.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated property.
-        /// </remarks>
-        public new ToDoList.App Master
-        {
-            get
-            {
-                return ((ToDoList.App)(base.Master));
-            }
-        }
+        protected global::ToDoList.UserControl.ToDoItemForm ToDoItemForm;
     }
 }

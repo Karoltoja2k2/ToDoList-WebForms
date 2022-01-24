@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Web;
 using System.Web.UI;
 using ToDoList.DataLayer.Model;
+using ToDoList.Helper;
 using ToDoList.Presenter;
 using ToDoList.View;
 
@@ -20,6 +22,10 @@ namespace ToDoList
         protected void Page_Load(object sender, EventArgs e)
         {
             _presenter = new DefaultViewPresenter(this);
+            if (!IsPostBack)
+            {
+                LoadComplete += (s, ev) => Page.DataBind();
+            }
         }
 
         protected void LoginClick(object sender, EventArgs e) =>
@@ -48,8 +54,9 @@ namespace ToDoList
 
         private void OnUserSelected(User user)
         {
-            Master.UserName = user.Name;
-            Response.Redirect($"ToDoItems.aspx?{QueryStringUserIdKey}={user.Id}");
+            HttpContext.Current.Session[AppConst.UserIdSessionKey] = user.Id;
+            HttpContext.Current.Session[AppConst.UserNameSessionKey] = user.Name;
+            Response.Redirect($"ToDoItems.aspx");
         }
     }
 }

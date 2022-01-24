@@ -1,6 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DatePicker.ascx.cs" Inherits="ToDoList.UserControl.DatePicker" %>
 <link href="../Style/UserControl/DatePicker.css" rel="stylesheet" />
 
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+
 <div style="display: flex; flex-direction:column;">
 
 <asp:TextBox ID="CalendarState" runat="server" Style="display: none;" />
@@ -26,3 +29,6 @@
     </asp:Calendar>
 </div>
 </div>
+
+        </ContentTemplate>
+    </asp:UpdatePanel>

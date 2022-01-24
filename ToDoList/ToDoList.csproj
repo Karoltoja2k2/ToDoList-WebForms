@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddToDoItemForm.aspx" />
     <Content Include="App_Data\ToDoList.mdf" />
     <Content Include="App_Data\ToDoList_log.ldf">
       <DependentUpon>ToDoList.mdf</DependentUpon>
@@ -99,6 +100,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddToDoItemForm.aspx.cs">
+      <DependentUpon>AddToDoItemForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddToDoItemForm.aspx.designer.cs">
+      <DependentUpon>AddToDoItemForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App.Master.cs">
       <DependentUpon>App.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -113,6 +121,8 @@
     <Compile Include="DataLayer\Repository\ToDoItemRepository.cs" />
     <Compile Include="DataLayer\Repository\UserRepository.cs" />
     <Compile Include="DataLayer\ToDoListDbContext.cs" />
+    <Compile Include="Helper\AppConst.cs" />
+    <Compile Include="Helper\AppSession.cs" />
     <Compile Include="Helper\DateTimeExtension.cs" />
     <Compile Include="Migrations\202201200925320_InitialCreate.cs" />
     <Compile Include="Migrations\202201200925320_InitialCreate.designer.cs">

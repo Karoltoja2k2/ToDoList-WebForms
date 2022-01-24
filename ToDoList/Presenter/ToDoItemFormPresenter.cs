@@ -49,6 +49,18 @@ namespace ToDoList.Presenter
         public void ClearForm() =>
             SetFormData(new ToDoItem { DueDate = DateTime.Now });
 
+        public void SetFormData(int toDoItem)
+        {
+            var item = _toDoItemRepository.Get(toDoItem);
+            if (item == null)
+            {
+                ClearForm();
+                return;
+            }
+
+            SetFormData(item);
+        }
+
         public void SetFormData(ToDoItem item)
         {
             _view.FormId = item.Id;

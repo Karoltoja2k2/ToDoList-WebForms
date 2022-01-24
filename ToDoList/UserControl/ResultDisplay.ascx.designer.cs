@@ -15,15 +15,6 @@ namespace ToDoList.UserControl
     {
 
         /// <summary>
-        /// UpdatePanel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-
-        /// <summary>
         /// ResultDisplayFilter control.
         /// </summary>
         /// <remarks>
@@ -33,13 +24,13 @@ namespace ToDoList.UserControl
         protected global::ToDoList.UserControl.ResultDisplayFilter ResultDisplayFilter;
 
         /// <summary>
-        /// ListWraper control.
+        /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ToDoList.UserControl.ContentWraper ListWraper;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
         /// Pagination control.

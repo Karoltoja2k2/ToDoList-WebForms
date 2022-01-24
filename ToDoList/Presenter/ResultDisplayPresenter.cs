@@ -38,22 +38,20 @@ namespace ToDoList.Presenter
             _view.Total = total;
         }
 
-        public void SetFormData(int toDoItemId)
+        public void EditRowCommand(int toDoItemId)
         {
-            _view.FormDataChanged(_repository.Get(toDoItemId), true);
+            _view.SetFormData(toDoItemId);
         }
 
         public void DeleteToDoItem(int toDoItemId)
         {
             _repository.Delete(toDoItemId);
-            _view.ResultDisplayDataChanged();
-            _view.FormDataChanged(new ToDoItem { DueDate = DateTime.Now });
+            _view.OnRowDelete();
         }
 
         public void UpdateIsDone(int toDoItemId, bool isDone)
         {
             _repository.UpdateIsDone(toDoItemId, isDone);
-            _view.ResultDisplayDataChanged();
         }
 
         public bool OnRowCommand(int id, string commandName)
@@ -68,7 +66,7 @@ namespace ToDoList.Presenter
             const string EditCommandName = "Edit";
             if (commandName.Equals(EditCommandName, StringComparison.OrdinalIgnoreCase))
             {
-                SetFormData(id);
+                EditRowCommand(id);
                 return true;
             }
 

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.UI.WebControls;
 using ToDoList.DataLayer.Model;
+using ToDoList.Helper;
 using ToDoList.Presenter;
 using ToDoList.View;
 
@@ -23,8 +26,7 @@ namespace ToDoList.UserControl
 
         public int UserId
         {
-            get => (int)ViewState[nameof(UserId)];
-            set => ViewState[nameof(UserId)] = value;
+            get => AppSession.GetUserId();
         }
 
         public string IsDone { get => ResultDisplayFilter.IsDone; }
@@ -51,8 +53,6 @@ namespace ToDoList.UserControl
 
         #endregion
 
-        public void SetUserId(int value) => UserId = value;
-
         public void SetDataSource(List<ToDoItem> data) => DataSource = data;
 
         public void ReloadData()
@@ -67,10 +67,13 @@ namespace ToDoList.UserControl
             ReloadData();
         }
 
-        public void FormDataChanged(ToDoItem toDoItem, bool? isVisible = null) =>
-            ToDoItemFormDataChangedEvent?.Invoke(toDoItem, isVisible);
+        public void OnRowDelete() =>
+            ReloadData();
 
-        public void ResultDisplayDataChanged() => ResultDisplayDataChangedEvent?.Invoke();
+        public void SetFormData(int toDoItemId)
+        {
+            Response.Redirect($"AddToDoItemForm.aspx?id={toDoItemId}");
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {

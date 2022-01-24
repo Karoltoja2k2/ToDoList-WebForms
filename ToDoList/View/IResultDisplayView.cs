@@ -24,10 +24,10 @@ namespace ToDoList.View
 
         int CurrentPage { get; }
 
+        void OnRowDelete();
+
         void SetDataSource(List<ToDoItem> data);
 
-        void FormDataChanged(ToDoItem toDoItem, bool? isVisible = null);
-
-        void ResultDisplayDataChanged();
+        void SetFormData(int toDoItemId);
     }
 }

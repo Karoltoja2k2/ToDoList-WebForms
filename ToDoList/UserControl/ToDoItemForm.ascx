@@ -8,7 +8,7 @@
                 ID="FormWraper"
                 runat="server"
                 ButtonValue='<%# FormId == 0 ? "Add item" : "Update item" %>'
-                DefaultIsHidden="true" />
+                DefaultIsHidden="false" />
 
             <div id="addToDoItemForm" class='<%= FormWraper.IsHidden ? "form-hidden" : "form" %>'>
                 <div class="form-row">

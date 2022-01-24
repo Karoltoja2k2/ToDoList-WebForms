@@ -7,17 +7,17 @@
 
 <%@ Import Namespace="ToDoList.Helper" %>
 <link href="../Style/UserControl/ResultDisplay.css" rel="stylesheet" />
-<asp:UpdatePanel ID="UpdatePanel2" runat="server">
-        <ContentTemplate>
             <uc1:ResultDisplayFilter runat="server" id="ResultDisplayFilter" />
-            <asp:GridView runat="server"    />
-            <uc1:ContentWraper
+<%--            <uc1:ContentWraper
                 ID="ListWraper"
                 ButtonValue="Items"
                 runat="server"
-                DefaultIsHidden="false" />
+                DefaultIsHidden="false" />--%>
 
-            <div class='<%= ListWraper.IsHidden ? "list-container-hidden" : "list-container" %>'>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <%--<div class='<%= ListWraper.IsHidden ? "list-container-hidden" : "list-container" %>'>--%>
+            <div class="list-container">
                 <uc1:Pagination runat="server" id="Pagination" />
                 <div class="list">
 
@@ -65,5 +65,6 @@
                 </asp:GridView>
                 </div>
             </div>
-        </ContentTemplate>
+
+                    </ContentTemplate>
     </asp:UpdatePanel>
