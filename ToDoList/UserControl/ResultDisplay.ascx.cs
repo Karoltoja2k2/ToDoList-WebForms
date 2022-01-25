@@ -17,7 +17,13 @@ namespace ToDoList.UserControl
 
         private const string IsDoneCheckboxId = "IsDoneCheckBoxWithItemId";
 
-        private ResultDisplayPresenter _presenter;
+        private readonly IResultDisplayPresenter _presenter;
+
+        public ResultDisplay(IResultDisplayPresenter presenter)
+        {
+            _presenter = presenter;
+            _presenter.SetView(this);
+        }
 
         #region view properties
 
@@ -79,7 +85,6 @@ namespace ToDoList.UserControl
                 Pagination.CurrentPage = 1;
             }
 
-            _presenter = new ResultDisplayPresenter(this);
             ResultDisplayFilter.FilterChangedEvent += FilterChanged;
             Pagination.PageChangedEvent += PageChangedHandler;
         }

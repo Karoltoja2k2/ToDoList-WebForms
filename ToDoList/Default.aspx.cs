@@ -10,16 +10,23 @@ namespace ToDoList
     {
         public const string QueryStringUserIdKey = "id";
 
-        private DefaultViewPresenter _presenter;
+        private readonly IDefaultViewPresenter _presenter;
+
+        public Default(IDefaultViewPresenter presenter)
+        {
+            _presenter = presenter;
+            _presenter.SetView(this);
+        }
 
         public string UserName 
         {
             get => UsernameTextBox.Text;
         }
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            _presenter = new DefaultViewPresenter(this);
+            _presenter.SetView(this);
         }
 
         protected void LoginClick(object sender, EventArgs e) =>

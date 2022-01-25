@@ -6,21 +6,22 @@ using ToDoList.View;
 
 namespace ToDoList.Presenter
 {
-    public class ToDoItemFormPresenter
+    public interface IToDoItemFormPresenter : IPresenterBase<IToDoItemFormView>
     {
-        private readonly IToDoItemFormView _view;
+        void SubmitForm();
 
+        void ClearForm();
+
+        void SetFormData(ToDoItem item);
+    }
+
+    public class ToDoItemFormPresenter : PresenterBase<IToDoItemFormView>, IToDoItemFormPresenter
+    {
         private readonly IToDoItemRepository _toDoItemRepository;
 
         public ToDoItemFormPresenter(IToDoItemRepository toDoItemRepository)
         {
             _toDoItemRepository = toDoItemRepository;
-        }
-
-        public ToDoItemFormPresenter(IToDoItemFormView view)
-            : this(new ToDoItemRepository())
-        {
-            _view = view;
         }
 
         public void SubmitForm()

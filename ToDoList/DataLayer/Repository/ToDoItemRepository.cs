@@ -19,28 +19,17 @@ namespace ToDoList.DataLayer.Repository
             int currentPage,
             int amount);
 
-        void Delete(int id);
-
         void Update(ToDoItem item);
     }
 
     public class ToDoItemRepository : RepositoryBase<ToDoItem>,  IToDoItemRepository
     {
-        public ToDoItemRepository()
-            : base (new ToDoListDbContext())
+        private readonly ToDoListDbContext _context;
+        
+        public ToDoItemRepository(ToDoListDbContext context)
+            : base (context)
         {
-        }
-
-        private ToDoListDbContext _context { get => (ToDoListDbContext)Context; }
-
-        public void Delete(int id)
-        {
-            var toDelete = _context.ToDoItem.SingleOrDefault(x => x.Id == id);
-            if (toDelete != null)
-            {
-                _context.ToDoItem.Remove(toDelete);
-                _context.SaveChanges();
-            }
+            _context = context;
         }
 
         public void UpdateIsDone(int id, bool isDone)

@@ -8,9 +8,17 @@ namespace ToDoList.UserControl
 {
     public partial class ToDoItemForm : System.Web.UI.UserControl, IToDoItemFormView
     {
-        private ToDoItemFormPresenter _presenter;
+        private IToDoItemFormPresenter _presenter;
+
+        public ToDoItemForm(IToDoItemFormPresenter presenter)
+        {
+            _presenter = presenter;
+            _presenter.SetView(this);
+        }
 
         public event ResultDisplayDataChangedHandler ResultDisplayDataChangedEvent;
+
+        #region view properties
 
         public int UserId
         {
@@ -41,6 +49,8 @@ namespace ToDoList.UserControl
             set => DueDatePicker.selected = value;
         }
 
+        #endregion
+
         public void SetUserId(int value) => UserId = value;
 
         public void TriggerForm(bool visible) => FormWraper.IsHidden = !visible;
@@ -51,7 +61,6 @@ namespace ToDoList.UserControl
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _presenter = new ToDoItemFormPresenter(this);
             if (!Page.IsPostBack)
                 FormId = 0;
         }
