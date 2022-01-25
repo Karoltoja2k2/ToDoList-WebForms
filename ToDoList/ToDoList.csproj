@@ -50,6 +50,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.WebFormsDependencyInjection.Unity, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebFormsDependencyInjection.Unity.1.0.0\lib\Net472\Microsoft.AspNet.WebFormsDependencyInjection.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -67,6 +70,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Unity.Abstractions, Version=3.3.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.3.3.0\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.8.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.8.6\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -79,6 +88,7 @@
       <DependentUpon>ToDoList.mdf</DependentUpon>
     </Content>
     <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Style\Base\DropDownList.css" />
     <Content Include="Style\Base\Input.css" />
     <Content Include="Style\Page\App.css" />
@@ -113,6 +123,9 @@
     <Compile Include="DataLayer\Repository\ToDoItemRepository.cs" />
     <Compile Include="DataLayer\Repository\UserRepository.cs" />
     <Compile Include="DataLayer\ToDoListDbContext.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Helper\DateTimeExtension.cs" />
     <Compile Include="Migrations\202201200925320_InitialCreate.cs" />
     <Compile Include="Migrations\202201200925320_InitialCreate.designer.cs">
@@ -120,6 +133,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Presenter\DefaultViewPresenter.cs" />
+    <Compile Include="Presenter\IPresenterBase.cs" />
+    <Compile Include="Presenter\PresenterBase.cs" />
     <Compile Include="Presenter\ResultDisplayPresenter.cs" />
     <Compile Include="Presenter\ToDoItemFormPresenter.cs" />
     <Compile Include="ToDoItems.aspx.cs">

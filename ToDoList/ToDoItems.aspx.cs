@@ -11,10 +11,15 @@ namespace ToDoList
 
     public partial class ToDoItems : Page
     {
+        private readonly IUserRepository _userRepository;
+
+        public ToDoItems(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            var _userRepository = new UserRepository();
-
             if (!IsPostBack)
             {
                 if (!int.TryParse(Request.QueryString[Default.QueryStringUserIdKey], out var userId))

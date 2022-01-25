@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ToDoList.DataLayer.Model;
+﻿using ToDoList.DataLayer.Model;
 using ToDoList.DataLayer.Repository;
 using ToDoList.View;
 
 namespace ToDoList.Presenter
 {
-    public class DefaultViewPresenter
+    public interface IDefaultViewPresenter : IPresenterBase<IDefaultView>
     {
-        private readonly IDefaultView _view;
+        void OnLogin();
 
+        void OnRegisterClick();
+    }
+
+    public class DefaultViewPresenter : PresenterBase<IDefaultView>, IDefaultViewPresenter
+    {
         private readonly IUserRepository _repository;
 
         public DefaultViewPresenter(IUserRepository repository)
         {
             _repository = repository;
-        }
-
-        public DefaultViewPresenter(IDefaultView view)
-            : this(new UserRepository())
-        {
-            _view = view;
         }
 
         public void OnLogin()

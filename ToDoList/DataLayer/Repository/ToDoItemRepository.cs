@@ -19,8 +19,6 @@ namespace ToDoList.DataLayer.Repository
             int currentPage,
             int amount);
 
-        void Delete(int id);
-
         void Update(ToDoItem item);
     }
 
@@ -32,16 +30,6 @@ namespace ToDoList.DataLayer.Repository
         }
 
         private ToDoListDbContext _context { get => (ToDoListDbContext)Context; }
-
-        public void Delete(int id)
-        {
-            var toDelete = _context.ToDoItem.SingleOrDefault(x => x.Id == id);
-            if (toDelete != null)
-            {
-                _context.ToDoItem.Remove(toDelete);
-                _context.SaveChanges();
-            }
-        }
 
         public void UpdateIsDone(int id, bool isDone)
         {

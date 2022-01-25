@@ -12,6 +12,8 @@ namespace ToDoList.DataLayer.Repository
         int Add(T entity);
 
         int Delete(T entity);
+
+        int Delete(int entityId);
     }
 
     public class RepositoryBase<T> : IRepositoryBase<T>
@@ -36,6 +38,17 @@ namespace ToDoList.DataLayer.Repository
             Context.Set<T>().Remove(entity);
             Context.SaveChanges();
             return entity.Id;
+        }
+
+        public int Delete(int entityId)
+        {
+            var toDelete = Context.Set<T>().SingleOrDefault(x => x.Id == entityId);
+            if (toDelete == null)
+                return 0;
+            
+            Context.Set<T>().Remove(toDelete);
+            Context.SaveChanges();
+            return toDelete.Id;
         }
 
         public T Get(int id)
