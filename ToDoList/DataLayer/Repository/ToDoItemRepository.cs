@@ -24,12 +24,13 @@ namespace ToDoList.DataLayer.Repository
 
     public class ToDoItemRepository : RepositoryBase<ToDoItem>,  IToDoItemRepository
     {
-        public ToDoItemRepository()
-            : base (new ToDoListDbContext())
+        private readonly ToDoListDbContext _context;
+        
+        public ToDoItemRepository(ToDoListDbContext context)
+            : base (context)
         {
+            _context = context;
         }
-
-        private ToDoListDbContext _context { get => (ToDoListDbContext)Context; }
 
         public void UpdateIsDone(int id, bool isDone)
         {

@@ -11,11 +11,11 @@ namespace ToDoList.DataLayer.Repository
 
     public class UserRepository : RepositoryBase<User>, IUserRepository
     {
-        private ToDoListDbContext _context { get => (ToDoListDbContext)Context; }
-        
-        public UserRepository()
-            : base(new ToDoListDbContext())
+        private readonly ToDoListDbContext _context;
+        public UserRepository(ToDoListDbContext context)
+            : base(context)
         {
+            _context = context;
         }
 
         public User GetByName(string name)

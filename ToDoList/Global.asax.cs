@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
+using ToDoList.DataLayer;
 using ToDoList.DataLayer.Repository;
 using ToDoList.Presenter;
 using Unity;
@@ -14,7 +15,6 @@ namespace ToDoList
 {
     public class Global : HttpApplication
     {
-
         protected void Application_Start(object sender, EventArgs e)
         {
             var container = this.AddUnity();
@@ -25,6 +25,8 @@ namespace ToDoList
             container.RegisterType<IResultDisplayPresenter, ResultDisplayPresenter>();
             container.RegisterType<IDefaultViewPresenter, DefaultViewPresenter>();
             container.RegisterType<IToDoItemFormPresenter, ToDoItemFormPresenter>();
+
+            container.RegisterType<ToDoListDbContext>();
         }
 
         protected void Session_Start(object sender, EventArgs e)
